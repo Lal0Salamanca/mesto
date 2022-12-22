@@ -9,3 +9,9 @@
 @import url(../blocks/profile/__info/profile__info.css);
 @import url(../blocks/profile/__name/profile__name.css);
 @import url(../blocks/profile/__profession/profile__profession.css);
+@import url(../blocks/elements/elements.css);
+@import url(../blocks/place/place.css);
+@import url(../blocks/place/__image/place__image.css);
+@import url(../blocks/place/__title/place__title.css);
+@import url(../blocks/place/__name/place__name.css);
+@import url(../blocks/place/__like/place__like.css);
