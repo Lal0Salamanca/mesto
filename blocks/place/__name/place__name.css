@@ -4,4 +4,7 @@
     width: 246px;
     height: 23px;
     margin: 25px 15px 31px 21px;
+    /* text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden; */
 }

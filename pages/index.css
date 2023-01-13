@@ -15,3 +15,5 @@
 @import url(../blocks/place/__title/place__title.css);
 @import url(../blocks/place/__name/place__name.css);
 @import url(../blocks/place/__like/place__like.css);
+@import url(../blocks/profile/__button-edit/profile__button-edit.css);
+@import url(../blocks/profile/__name-container/profile__name-container.css);
