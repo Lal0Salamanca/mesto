@@ -31,7 +31,7 @@
             <div class="profile__info">
                 <div class="profile__name-container">
                     <p class="profile__name">Жак-Ив Кусто</p>
-                    <button class="profile__button-edit">
+                    <button type="button" class="profile__button-edit" aria-label="Редактировать данные профиля">
                         <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M10 1.32827L2.60377 8.7666L1.28302 7.41936L8.66038 0L10 1.32827ZM0 10L1.96226 9.41177L0.584906 8.08349L0 10Z" fill="white"/>
                         </svg>
@@ -39,7 +39,7 @@
                 </div>
                 <p class="profile__profession">Исследователь океана</p>
             </div>
-            <button class="profile__button-add"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <button type="button" class="profile__button-add" aria-label="Добавить фото"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M22 9.77778H12.2222V0H9.77778V9.77778H0V12.2222H9.77778V22H12.2222V12.2222H22V9.77778Z" fill="white"/>
                 </svg>
                 </button>
@@ -92,5 +92,16 @@
     <footer class="footer">
         <p class="footer__copyright">© 2020 Mesto Russia</p>
     </footer>
+
+    <section class="popup">
+        <div class="popup__container">
+            <h2 class="popup__title">Редактировать профиль</h2>
+            <input type="text">
+            <input type="text">
+            <button class="popup__button-save" type="submit" aria-label="Сохранить изменения">Сохранить</button>
+        </div>
+    </section>
+
+    <script src="./scripts/main.js"></script>
 </body>
 </html>
