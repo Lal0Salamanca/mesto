@@ -2,9 +2,9 @@
     width: 32px;
     height: 32px;
     background-color: transparent;
-    position: relative;
-    bottom: 35px;
-    left: 425px;
+    position: absolute;
+    top: -35px;
+    right: -35px;
     cursor: pointer;
     border: 0;
 }

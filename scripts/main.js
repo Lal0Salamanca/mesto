@@ -30,6 +30,9 @@ popup.addEventListener('click', function(event) {
 let nameInput = document.querySelector('.popup__input_name');// Воспользуйтесь инструментом .querySelector()
 let jobInput = document.querySelector('.popup__input_job');// Воспользуйтесь инструментом .querySelector()
 
+nameInput.value = 'Жак-Ив Кусто';
+jobInput.value = 'Исследователь океана';
+
 
 function editForm() {
     // Находим форму в DOM
