@@ -1,3 +1,4 @@
 .profile__name-container {
     display: flex;
+    width: 500px;
 }
