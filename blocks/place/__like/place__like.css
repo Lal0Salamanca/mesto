@@ -1,3 +1,12 @@
 .place__like {
     height: 19px;
+    margin-right: 0;
+    margin-left: 15px;
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+}
+
+.place__like:hover {
+    opacity: 0.5;
 }
