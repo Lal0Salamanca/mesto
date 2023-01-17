@@ -7,7 +7,7 @@ let editName = profileContainer.querySelector('.profile__name');
 let editProf = profileContainer.querySelector('.profile__profession');
 
 let formElement = document.querySelector('.popup__container');
-let saveButton = formElement.querySelector('.popup__button-save')
+let saveButton = formElement.querySelector('.popup__button-save');
 let nameInput = formElement.querySelector('.popup__input_name');
 let jobInput = formElement.querySelector('.popup__input_job');
 
@@ -50,43 +50,16 @@ jobInput.value = 'Исследователь океана';
 // она никуда отправляться не будет
 function handleFormSubmit (evt) {
     evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
-                                                // Так мы можем определить свою логику отправки.
-                                                // О том, как это делать, расскажем позже.
 
     // Получите значение полей jobInput и nameInput из свойства value
     // Выберите элементы, куда должны быть вставлены значения полей
+    // Вставьте новые значения с помощью textContent
     editName.textContent = nameInput.value;
     editProf.textContent = jobInput.value;
 
-    // profileContainer.textContent = `<div class="profile__info">
-    //             <div class="profile__name-container">
-    //                 <p class="profile__name">${nameInput.value}</p>
-    //                 <button type="button" class="profile__button-edit popup-open" aria-label="Редактировать данные профиля">
-    //                     <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-    //                     <path d="M10 1.32827L2.60377 8.7666L1.28302 7.41936L8.66038 0L10 1.32827ZM0 10L1.96226 9.41177L0.584906 8.08349L0 10Z" fill="white"/>
-    //                     </svg>
-    //                 </button>
-    //             </div>
-    //             <p class="profile__profession">${jobInput.value}</p>
-    //         </div>`;
-
+     toggleClass();
     
-    // Вставьте новые значения с помощью textContent
 }
-
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
-// formElement.addEventListener('submit', handleFormSubmit); для чего этот тогда обработчик?!
-
-
-saveButton.addEventListener('click', handleFormSubmit);
-saveButton.addEventListener('click', toggleClass)
-// Задания
-// 1) Открытие и закрытие попапа +
-// Попап должен открываться по нажатию кнопки «Редактировать», а закрываться — при клике по крестику в правом верхнем углу
-
-// 2)При открытии формы поля «Имя» и «О себе» +
-// должны быть заполнены теми значениями, которые отображаются на странице.
-
-// 3)После внесения изменений и нажатия кнопки «Сохранить» 
-// информация на странице должна обновиться, а попап автоматически закрыться
+formElement.addEventListener('submit', handleFormSubmit);
