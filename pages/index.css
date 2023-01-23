@@ -28,3 +28,11 @@
 @import url(../blocks/popup/__input/_job/popup__input_job.css);
 @import url(../blocks/popup/__button-close/popup__button-close.css);
 @import url(../blocks/popup/_opened/popup_opened.css);
+@import url(../blocks/popupNewCard/popupNewCard.css);
+@import url(../blocks/popupNewCard/__button-close/popupNewCard__button-close.css);
+@import url(../blocks/popupNewCard/__button-create/popupNewCard__button-create.css);
+@import url(../blocks/popupNewCard/__container/popupNewCard__container.css);
+@import url(../blocks/popupNewCard/__input/popupNewCard__input.css);
+@import url(../blocks/popupNewCard/__input/_link/popupNewCard__input_link.css);
+@import url(../blocks/popupNewCard/__input/_name/popupNewCard__input_name.css);
+@import url(../blocks/popupNewCard/__title/popupNewCard__title.css);

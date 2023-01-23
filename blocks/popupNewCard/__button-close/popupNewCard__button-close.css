@@ -1,0 +1,14 @@
+.popupNewCard__button-close {
+    width: 32px;
+    height: 32px;
+    background-color: transparent;
+    position: absolute;
+    top: -35px;
+    right: -35px;
+    cursor: pointer;
+    border: 0;
+}
+
+.popupNewCard__button-close:hover {
+    opacity: 0.5;
+}
