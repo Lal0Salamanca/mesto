@@ -63,3 +63,65 @@ function handleFormSubmit (evt) {
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
 formElement.addEventListener('submit', handleFormSubmit);
+
+const initialCards = [
+    {
+      name: 'Архыз',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+    },
+    {
+      name: 'Челябинская область',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+    },
+    {
+      name: 'Иваново',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+    },
+    {
+      name: 'Камчатка',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+    },
+    {
+      name: 'Холмогорский район',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+    },
+    {
+      name: 'Байкал',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+    }
+  ];
+
+let cardTemplate = document.querySelector('.card_template').content;
+let cardName = cardTemplate.querySelector('.place__title');
+let cardImg = cardTemplate.querySelector('.place__image');
+let cardsList = document.querySelector(".elements");
+
+function renderCards() {
+	initialCards.forEach(renderCard);
+}
+
+function renderCard(card) {
+	const htmlElement = cardTemplate.cloneNode(true);
+	htmlElement.querySelector('.place__title').textContent = card.name;
+  htmlElement.querySelector('.place__image').src = card.link;
+
+	cardsList.appendChild(htmlElement);
+}
+
+renderCards();
+
+// 1) добавить 6 карточек из коробки
+// 2) Добавьте в проект форму добавления новой карточки. Макет найдёте в «Фигме».
+// Сделайте так, чтобы форма открывалась нажатием на кнопку «+» и закрывалась кликом на крестик
+// 3) Дайте пользователю возможность добавлять карточки:
+// что бы Можно было написать имя карточки и дать ссылку на картинку.
+// Сделайте так, чтобы при клике на «сохранить» новая карточка попадала в начало контейнера с ними.
+//  А диалоговое окно после добавления автоматически закрывалось.
+// Чтобы создавать новые карточки, добавьте обработчик событий submit. 
+// Сделайте это аналогично прошлому спринту, в котором вы настраивали редактирование информации о пользователе.
+// 4) Сделайте так, чтобы карточки можно было лайкать:
+// Если лайкнуть карточку, сердечко поменяет цвет.
+// 5) Добавьте карточкам иконку удаления. 
+// настройте, чтобы карточка удалялась при клике на эту иконку:
+// 6) Настройте просмотр фотографий. Пусть открываются нажатием на картинку и закрываются кликом на крестик:
+// 7) Сделайте так, чтобы все попапы плавно открывались. Пусть проявляются из прозрачности и уходят в неё при закрытии

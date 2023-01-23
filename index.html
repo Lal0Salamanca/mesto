@@ -45,7 +45,7 @@
                 </button>
         </section>
         <section class="elements">
-            <div class="place">
+            <!-- <div class="place">
                 <img src="./images/karachaevsk.jpg" alt="karachaevsk1" class="place__image">
                 <div class="place__name">
                     <p class="place__title">Карачаевск</p>
@@ -86,12 +86,22 @@
                     <p class="place__title">Карачаево-Черкессия</p>
                     <button type="button" aria-label="Поставить лайк" class="place__like"><img src="./images/Vector.png"></button>
                 </div>
-            </div>
+            </div> -->
         </section>
     </main>
     <footer class="footer">
         <p class="footer__copyright">© 2020 Mesto Russia</p>
     </footer>
+
+    <template class="card_template">
+        <div class="place">
+            <img src="" alt="" class="place__image">
+            <div class="place__name">
+                <p class="place__title"></p>
+                <button type="button" aria-label="Поставить лайк" class="place__like"><img src="./images/Vector.png"></button>
+            </div>
+        </div>
+    </template>
 
     <section class="popup">
         <form class="popup__container">
@@ -103,7 +113,19 @@
             <input class="popup__input popup__input_name" type="text">
             <input class="popup__input popup__input_job" type="text">
             <button type="submit" class="popup__button-save" aria-label="Сохранить изменения">Сохранить</button>
-            <!-- <input class="popup__button-save" type="submit" value="Сохранить"> -->
+        </form>
+    </section>
+
+    <section class="popupNewCard">
+        <form class="popupNewCard__container">
+            <button type="button" class="popup__button-close" aria-label="Закрыть модальное окно"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M32 28.8L19.2 16L32 3.2L28.8 0L16 12.8L3.2 0L0 3.2L12.8 16L0 28.8L3.2 32L16 19.2L28.8 32L32 28.8Z" fill="white"/>
+                </svg>
+            </button>
+            <h2 class="popup__title">Редактировать профиль</h2>
+            <input class="popup__input popup__input_name" type="text">
+            <input class="popup__input popup__input_job" type="text">
+            <button type="submit" class="popup__button-save" aria-label="Сохранить изменения">Сохранить</button>
         </form>
     </section>
 
