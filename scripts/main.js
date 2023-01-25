@@ -112,9 +112,10 @@ function renderCard(card) {
 	htmlElement.querySelector('.place__title').textContent = card.name;
   htmlElement.querySelector('.place__image').src = card.link;
   const deleteButton = htmlElement.querySelector('.place__delete');
-  // const  = htmlElement.querySelector('.place__delete');
+  const likeButton = htmlElement.querySelector('.place__like');
 
   deleteButton.addEventListener('click', handleDelete);
+  likeButton.addEventListener('click', handleLike);
 
 	cardsList.prepend(htmlElement);
 }
@@ -143,6 +144,10 @@ function handleSubmit(evt) {
 
 function handleDelete(evt) {
 	evt.target.closest('.place').remove();
+}
+
+function handleLike(evt) {
+	evt.target.classList.toggle('place__like_active');
 }
 
 newCardformElement.addEventListener('submit', handleSubmit);
