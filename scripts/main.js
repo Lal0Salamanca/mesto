@@ -101,7 +101,7 @@ let cardTemplate = document.querySelector('.card_template').content;
 let cardName = cardTemplate.querySelector('.place__title');
 let cardImg = cardTemplate.querySelector('.place__image');
 let cardsList = document.querySelector('.elements');
-let deleteButton = cardTemplate.querySelector('.place__delete');
+
 
 function renderCards() {
 	initialCards.forEach(renderCard);
@@ -111,6 +111,8 @@ function renderCard(card) {
 	const htmlElement = cardTemplate.cloneNode(true);
 	htmlElement.querySelector('.place__title').textContent = card.name;
   htmlElement.querySelector('.place__image').src = card.link;
+  const deleteButton = htmlElement.querySelector('.place__delete');
+  // const  = htmlElement.querySelector('.place__delete');
 
   deleteButton.addEventListener('click', handleDelete);
 
@@ -140,7 +142,7 @@ function handleSubmit(evt) {
 }
 
 function handleDelete(evt) {
-	evt.target.closest('.card_template').remove();
+	evt.target.closest('.place').remove();
 }
 
 newCardformElement.addEventListener('submit', handleSubmit);
