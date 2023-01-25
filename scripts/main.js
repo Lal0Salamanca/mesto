@@ -21,6 +21,7 @@ let newCardNameInput = newCardformElement.querySelector('.popupNewCard__input_na
 let newCardLinkInput = newCardformElement.querySelector('.popupNewCard__input_link');
 
 
+
 // openPopup.addEventListener('click', function() {
 //     popup.classList.add('popup_opened');
 // })
@@ -99,7 +100,8 @@ const initialCards = [
 let cardTemplate = document.querySelector('.card_template').content;
 let cardName = cardTemplate.querySelector('.place__title');
 let cardImg = cardTemplate.querySelector('.place__image');
-let cardsList = document.querySelector(".elements");
+let cardsList = document.querySelector('.elements');
+let deleteButton = cardTemplate.querySelector('.place__delete');
 
 function renderCards() {
 	initialCards.forEach(renderCard);
@@ -109,6 +111,8 @@ function renderCard(card) {
 	const htmlElement = cardTemplate.cloneNode(true);
 	htmlElement.querySelector('.place__title').textContent = card.name;
   htmlElement.querySelector('.place__image').src = card.link;
+
+  deleteButton.addEventListener('click', handleDelete);
 
 	cardsList.prepend(htmlElement);
 }
@@ -122,8 +126,6 @@ function toggleClassNewCard() {
 
 function handleSubmit(evt) {
   evt.preventDefault();
-  // const newCardNameInput = newCardformElement.querySelector('.popupNewCard__input_name');
-  // const newCardLinkInput = newCardformElement.querySelector('.popupNewCard__input_link');
 
   const newcard = { 
     name: newCardNameInput.value,
@@ -137,9 +139,15 @@ function handleSubmit(evt) {
   toggleClassNewCard();
 }
 
+function handleDelete(evt) {
+	evt.target.closest('.card_template').remove();
+}
+
 newCardformElement.addEventListener('submit', handleSubmit);
 
 renderCards();
+
+
 
 // 1) добавить 6 карточек из коробки +
 // 2) Добавьте в проект форму добавления новой карточки. Макет найдёте в «Фигме».
