@@ -1,8 +1,9 @@
 .place__like {
     height: 19px;
-    margin-right: 0;
-    /* margin-left: 15px; */
+    width: 22px;
+    padding: 0;
     background-color: transparent;
+    background: url(/images/heart_disabled.svg);
     border: 0;
     cursor: pointer;
 }

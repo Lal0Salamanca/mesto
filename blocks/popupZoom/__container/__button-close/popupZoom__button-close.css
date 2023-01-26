@@ -1,0 +1,16 @@
+.popupZoom__button-close {
+    width: 32px;
+    height: 32px;
+    position: relative;
+    margin-right: -35px;
+    margin-bottom: 5px;
+    margin-left: auto;
+    padding: 0;
+    background-color: transparent;
+    cursor: pointer;
+    border: 0;
+}
+
+.popupZoom__button-close:hover {
+    opacity: 0.5;
+}

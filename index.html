@@ -45,48 +45,7 @@
                 </button>
         </section>
         <section class="elements">
-            <!-- <div class="place">
-                <img src="./images/karachaevsk.jpg" alt="karachaevsk1" class="place__image">
-                <div class="place__name">
-                    <p class="place__title">Карачаевск</p>
-                    <button type="button" aria-label="Поставить лайк" class="place__like"><img src="./images/Vector.png"></button>
-                </div>
-            </div>
-            <div class="place">
-                <img src="./images/elbrys.jpg" alt="elbrys1" class="place__image">
-                <div class="place__name">
-                    <p class="place__title">Гора Эльбрус</p>
-                    <button type="button" aria-label="Поставить лайк" class="place__like"><img src="./images/Vector.png"></button>
-                </div>
-            </div>
-            <div class="place">
-                <img src="./images/dombai.jpg" alt="dombai1" class="place__image">
-                <div class="place__name">
-                    <p class="place__title">Домбай</p>
-                    <button type="button" aria-label="Поставить лайк" class="place__like"><img src="./images/Vector.png"></button>
-                </div>
-            </div>
-            <div class="place">
-                <img src="./images/elbrys.jpg" alt="elbrys2" class="place__image">
-                <div class="place__name">
-                    <p class="place__title">Гора Эльбрус</p>
-                    <button type="button" aria-label="Поставить лайк" class="place__like"><img src="./images/Vector.png"></button>
-                </div>
-            </div>
-            <div class="place">
-                <img src="./images/dombai.jpg" alt="dombai2" class="place__image">
-                <div class="place__name">
-                    <p class="place__title">Домбай</p>
-                    <button type="button" aria-label="Поставить лайк" class="place__like"><img src="./images/Vector.png"></button>
-                </div>
-            </div>
-            <div class="place">
-                <img src="./images/karachaevsk.jpg" alt="karachaevsk2" class="place__image">
-                <div class="place__name">
-                    <p class="place__title">Карачаево-Черкессия</p>
-                    <button type="button" aria-label="Поставить лайк" class="place__like"><img src="./images/Vector.png"></button>
-                </div>
-            </div> -->
+
         </section>
     </main>
     <footer class="footer">
@@ -95,10 +54,10 @@
 
     <template class="card_template">
         <div class="place">
-            <img src="" alt="" class="place__image">
+            <img src="" alt="" class="place__image popupZoom-open"/>
             <div class="place__name">
                 <p class="place__title"></p>
-                <button type="button" aria-label="Поставить лайк" class="place__like"><img src="./images/Vector.png"></button>
+                <button type="button" aria-label="Поставить лайк" class="place__like"></button>
                 <button type="button" aria-label="Удалить карточку" class="place__delete"><img src="./images/recycle bin.svg"></button>
             </div>
         </div>
@@ -128,6 +87,17 @@
             <input class="popupNewCard__input popupNewCard__input_link" type="text" placeholder="Ссылка на картинку">
             <button type="submit" class="popupNewCard__button-create" aria-label="Создать карточку">Создать</button>
         </form>
+    </section>
+
+    <section class="popupZoom">
+        <div class="popupZoom__container">
+            <button type="button" class="popupZoom__button-close" aria-label="Закрыть модальное окно"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M32 28.8L19.2 16L32 3.2L28.8 0L16 12.8L3.2 0L0 3.2L12.8 16L0 28.8L3.2 32L16 19.2L28.8 32L32 28.8Z" fill="white"/>
+                </svg>
+            </button>
+            <img class="popupZoom__img" src="" alt="Увеличенное фото карточки">
+            <h3 class="popupZoom__title"></h3>
+        </div>
     </section>
 
     <script src="./scripts/main.js"></script>
