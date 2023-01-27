@@ -1,6 +1,5 @@
 .popupZoom_opened {
-    /* display: flex; */
     visibility: visible;
-    /* opacity: 1;
-    transition: visibility 0s, opacity 0.27s linear; */
+    opacity: 1;
+    transition: visibility 0s, opacity 0.27s linear;
 }

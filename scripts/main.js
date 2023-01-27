@@ -110,16 +110,15 @@ function renderCards() {
 	initialCards.forEach(renderCard);
 }
 
-function renderCard(evt) {
+function renderCard(card) {
 	const htmlElement = cardTemplate.cloneNode(true);
-	htmlElement.querySelector('.place__title').textContent = evt.name;
-  htmlElement.querySelector('.place__image').src = evt.link;
+	htmlElement.querySelector('.place__title').textContent = card.name;
+  htmlElement.querySelector('.place__image').src = card.link;
   const deleteButton = htmlElement.querySelector('.place__delete');
   const likeButton = htmlElement.querySelector('.place__like');
   const openPopupZoom = htmlElement.querySelector('.popupZoom-open');
 
   openPopupZoom.addEventListener('click', toggleClassImgZoom);
-
   deleteButton.addEventListener('click', handleDelete);
   likeButton.addEventListener('click', handleLike);
 
@@ -133,11 +132,10 @@ function toggleClassNewCard() {
   popupNewCard.classList.toggle('popupNewCard_opened');
 }
 
-function toggleClassImgZoom() {
-  debugger
+function toggleClassImgZoom(evt) {
   popupZoom.classList.toggle('popupZoom_opened');
-  popupZoomImgName.innerText = evt.currentTarget.name;
-  popupZoomImgLink.src = this.src;
+  popupZoomImgName.textContent = evt.currentTarget.parentElement.innerText;
+  popupZoomImgLink.src = evt.currentTarget.src;
 }
 
 closepopupZoom.addEventListener('click', toggleClassImgZoom);
@@ -188,9 +186,7 @@ renderCards();
 // Если лайкнуть карточку, сердечко поменяет цвет. +
 // 5) Добавьте карточкам иконку удаления. 
 // настройте, чтобы карточка удалялась при клике на эту иконку +
-
 // 6) Настройте просмотр фотографий. Пусть открываются нажатием на картинку 
-// и закрываются кликом на крестик
-
+// и закрываются кликом на крестик +
 // 7) Сделайте так, чтобы все попапы плавно открывались. Пусть проявляются 
 // из прозрачности и уходят в неё при закрытии +
