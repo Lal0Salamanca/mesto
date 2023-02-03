@@ -133,8 +133,9 @@ function toggleClassNewCard() {
 }
 
 function toggleClassImgZoom(evt) {
+  debugger
   popupZoom.classList.toggle('popupZoom_opened');
-  popupZoomImgName.textContent = evt.currentTarget.parentElement.innerText;
+  popupZoomImgName.textContent = evt.currentTarget.parentElement.textContent;
   popupZoomImgLink.src = evt.currentTarget.src;
 }
 
