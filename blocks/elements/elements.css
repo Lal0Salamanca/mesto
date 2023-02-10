@@ -6,3 +6,27 @@
     gap: 20px 17px;
     margin: 0 auto 67px;
 }
+
+@media screen and (max-width: 1023px) {
+    .elements {
+        display: grid;
+        justify-content: center;
+        max-width: 85vw;
+        grid-template-columns: repeat(2, 282px);
+        grid-template-rows: repeat(3, 361px);
+        gap: 20px 17px;
+        margin: 0 auto 67px;
+    }
+}
+
+@media screen and (max-width: 319px) {
+    .elements {
+        display: grid;
+        justify-content: center;
+        max-width: 880px;
+        grid-template-columns: repeat(1, 282px);
+        grid-template-rows: repeat(4, 361px);
+        gap: 20px 17px;
+        margin: 0 auto 67px;
+    }
+}

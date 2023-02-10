@@ -3,3 +3,11 @@
     color: white;
     opacity: 0.3;
 }
+
+@media screen and (max-width: 1023px) {
+    .header__line {
+        max-width: 85vw;
+        color: white;
+        opacity: 0.3;
+    }
+}

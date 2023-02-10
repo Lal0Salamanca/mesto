@@ -4,5 +4,16 @@
     justify-content: space-between;
     max-width: 880px;
     height: 74px;
-    margin: 45px auto 0;
+    margin: 45px auto 0 auto;
+}
+
+@media screen and (max-width: 1023px) {
+    .header {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        max-width: 85vw;
+        height: 74px;
+        margin: 45px auto 0;
+    }
 }

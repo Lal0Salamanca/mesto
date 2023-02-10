@@ -2,5 +2,14 @@
     display: flex;
     max-width: 880px;
     height: 18px;
-    margin: 0 auto 60px;
+    margin: 0 auto 60px auto;
+}
+
+@media screen and (max-width: 1023px) {
+    .footer {
+        display: flex;
+        max-width: 85vw;
+        height: 18px;
+        margin: 0 auto 60px;
+    }
 }
