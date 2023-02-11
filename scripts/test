@@ -89,3 +89,5 @@ const showInputError = (formElement, inputElement, errorMessage) => {
   
   // Вызовем функцию
   enableValidation(); 
+
+  // что значит внешний код/приватный код?

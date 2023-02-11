@@ -7,7 +7,7 @@ let editName = profileContainer.querySelector('.profile__name');
 let editProf = profileContainer.querySelector('.profile__profession');
 
 let formElement = document.querySelector('.popup__container');
-let saveButton = formElement.querySelector('.popup__button-save');
+// let saveButton = formElement.querySelector('.popup__button-save');
 let nameInput = formElement.querySelector('.popup__input_name');
 let jobInput = formElement.querySelector('.popup__input_job');
 
@@ -16,7 +16,7 @@ let popupNewCard = document.querySelector('.popupNewCard');
 let closepopupNewCard = document.querySelector('.popupNewCard__button-close');
 
 let newCardformElement = document.querySelector('.popupNewCard__container');
-let createButton = newCardformElement.querySelector('.popupNewCard__button-create');
+// let createButton = newCardformElement.querySelector('.popupNewCard__button-create');
 let newCardNameInput = newCardformElement.querySelector('.popupNewCard__input_name');
 let newCardLinkInput = newCardformElement.querySelector('.popupNewCard__input_link');
 

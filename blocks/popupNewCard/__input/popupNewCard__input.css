@@ -2,7 +2,7 @@
     border: 0;
     border-bottom: 1px solid #000000;
     margin: 0 36px 30px 36px;
-    height: 27px;
+    min-height: 35px;
     font-family: 'Inter';
     font-weight: 400;
     font-size: 14px;
@@ -11,6 +11,10 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+}
+
+.popupNewCard__input:focus {
+    outline: 2px solid rgba(0, 191, 255, 0.5);;
 }
 
 .popupNewCard__input:last-of-type {
