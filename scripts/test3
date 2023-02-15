@@ -1,5 +1,5 @@
 // let formElement = document.querySelector('.popup__container'); переменная уже обьявлена в main.js
-const elementInput = document.querySelector('.form__input');
+const elementInput = document.querySelector('.form_inputs');
 // const buttons = document.querySelector('.form_buttons');
 const formError = document.querySelector(`.${elementInput.id}-error`)
 
@@ -29,11 +29,11 @@ const hideInputError = (form, element) => {
 // функция проверки поля на валидность
 
 // вариант функции когда нужно валидировать несколько полей
-const isValid = (form, elementInput) => {
+const isValid = (formElement, elementInput) => {
   if (!elementInput.validity.valid) {
-    showInputError(form, elementInput, elementInput.validationMessage);
+    showInputError(formElement, elementInput, elementInput.validationMessage);
   } else {
-    hideInputError(form, elementInput);
+    hideInputError(formElement, elementInput);
   }
 };
 
@@ -42,25 +42,25 @@ const isValid = (form, elementInput) => {
 
 
 // одному полю мало, надо слушательли всем полям формы
-const setEventListeners = (form) => {
+const setEventListeners = (formElement) => {
   // Находим все поля внутри формы,
   // сделаем из них массив методом Array.from
-  const inputList = Array.from(form.querySelectorAll('.form__input'));
+  const inputList = Array.from(formElement.querySelectorAll('.form_inputs'));
   // Найдём в текущей форме кнопку отправки
-  const button = form.querySelector('.form__button');
-  // const buttonEdit = formElement.querySelector('.form_buttons_edit');
-  // const buttonCreateNC = newCardformElement.querySelector('.form_buttons_new-card');
+  const buttons = document.querySelector('.form_buttons');
+  // const buttonEdit = document.querySelector('.form_buttons_edit');
+  // const buttonCreateNC = document.querySelector('.form_buttons_new-card');
   // Обойдём все элементы полученной коллекции
-  toggleButtonState(inputList, button);
+  toggleButtonState(inputList, buttons);
 
   inputList.forEach((inputElement) => {
     // каждому полю добавим обработчик события input
     inputElement.addEventListener('input', () => {
       // Внутри колбэка вызовем isValid,
       // передав ей форму и проверяемый элемент
-      isValid(form, inputElement);
+      isValid(formElement, inputElement);
 
-      toggleButtonState(inputList, button);
+      toggleButtonState(inputList, buttons);
     });
   });
 };
@@ -99,12 +99,12 @@ const enableValidation = () => {
   const formList = Array.from(document.querySelectorAll('.form'));
 
   // Переберём полученную коллекцию
-  formList.forEach((form) => {
+  formList.forEach((formElement) => {
     // Для каждой формы вызовем функцию setEventListeners,
     // передав ей элемент формы
-    setEventListeners(form);
+    setEventListeners(formElement);
   });
 };
 
 // Вызовем функцию
-enableValidation();
+enableValidation(); 
