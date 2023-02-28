@@ -1,3 +1,5 @@
+const cardsList = document.querySelector('.elements');
+
 const initialCards = [
     {
         name: 'Архыз',
@@ -32,7 +34,7 @@ class Card {
     }
 
     _getTemplate() {
-        const cardTemplate = document.querySelector('.card-template').content;
+        const cardTemplate = document.querySelector('.card_template').content;
         cardTemplate.querySelector('.place').cloneNode(true);
 
         return cardTemplate;
