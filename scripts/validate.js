@@ -1,6 +1,4 @@
-// let formElement = document.querySelector('.popup__container'); переменная уже обьявлена в main.js
 const elementInput = document.querySelector('.form__input');
-// const buttons = document.querySelector('.form_buttons');
 const formError = document.querySelector(`.${elementInput.id}-error`)
 
 // живая валидация
@@ -48,8 +46,6 @@ const setEventListeners = (form) => {
   const inputList = Array.from(form.querySelectorAll('.form__input'));
   // Найдём в текущей форме кнопку отправки
   const button = form.querySelector('.form__button');
-  // const buttonEdit = formElement.querySelector('.form_buttons_edit');
-  // const buttonCreateNC = newCardformElement.querySelector('.form_buttons_new-card');
   // Обойдём все элементы полученной коллекции
   toggleButtonState(inputList, button);
 

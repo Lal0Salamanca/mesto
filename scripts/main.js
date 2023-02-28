@@ -7,7 +7,6 @@ let editName = profileContainer.querySelector('.profile__name');
 let editProf = profileContainer.querySelector('.profile__profession');
 
 let formElement = document.querySelector('.popup__container');
-// let saveButton = formElement.querySelector('.popup__button-save');
 let nameInput = formElement.querySelector('.popup__input_name');
 let jobInput = formElement.querySelector('.popup__input_job');
 
@@ -16,9 +15,19 @@ let popupNewCard = document.querySelector('.popupNewCard');
 let closepopupNewCard = document.querySelector('.popupNewCard__button-close');
 
 let newCardformElement = document.querySelector('.popupNewCard__container');
-// let createButton = newCardformElement.querySelector('.popupNewCard__button-create');
 let newCardNameInput = newCardformElement.querySelector('.popupNewCard__input_name');
 let newCardLinkInput = newCardformElement.querySelector('.popupNewCard__input_link');
+
+const cardTemplate = document.querySelector('.card_template').content;
+const cardName = cardTemplate.querySelector('.place__title');
+const cardImg = cardTemplate.querySelector('.place__image');
+const cardsList = document.querySelector('.elements');
+
+const openPopupZoom = cardTemplate.querySelector('.popupZoom-open');
+const popupZoom = document.querySelector('.popupZoom');
+const closepopupZoom = popupZoom.querySelector('.popupZoom__button-close');
+const popupZoomImgName = popupZoom.querySelector('.popupZoom__title');
+const popupZoomImgLink = popupZoom.querySelector('.popupZoom__img');
 
 // openPopup.addEventListener('click', function() {
 //     popup.classList.add('popup_opened');
@@ -32,11 +41,20 @@ let newCardLinkInput = newCardformElement.querySelector('.popupNewCard__input_li
 openPopup.addEventListener('click', toggleClass)
 closePopup.addEventListener('click', toggleClass)
 
+// Закрытие попапов нажатием на Esc
+document.addEventListener('keydown', function(event) {
+  if (event.keyCode === 27) {
+    popup.classList.remove('popup_opened');
+    popupNewCard.classList.remove('popupNewCard_opened');
+    popupZoom.classList.remove('popupZoom_opened');
+  }
+})
+
+// Закрытие попапа EDIT нажатием на свобоное пространство вокруг попапа
 function toggleClass() {
-    popup.classList.toggle('popup_opened');
+  popup.classList.toggle('popup_opened');
 }
 
-// Закрытие попапа редактирования нажатием на свобоное пространство вокруг попапа
 popup.addEventListener('click', function(event) {
     // console.log('target: ', event.target)
     // console.log('currentTarget: ', event.currentTarget)
@@ -44,6 +62,33 @@ popup.addEventListener('click', function(event) {
         toggleClass()
     }
 })
+
+// Закрытие попапа CreateNC нажатием на свобоное пространство вокруг попапа
+function toggleClassPopupNC() {
+  popupNewCard.classList.toggle('popupNewCard_opened');
+}
+
+popupNewCard.addEventListener('click', function(event) {
+  // console.log('target: ', event.target)
+  // console.log('currentTarget: ', event.currentTarget)
+  if (event.target === event.currentTarget) {
+    toggleClassPopupNC()
+  }
+})
+
+// Закрытие попапа Zoom нажатием на свобоное пространство вокруг попапа
+function toggleClassZoom() {
+  popupZoom.classList.toggle('popupZoom_opened');
+}
+
+popupZoom.addEventListener('click', function(event) {
+  // console.log('target: ', event.target)
+  // console.log('currentTarget: ', event.currentTarget)
+  if (event.target === event.currentTarget) {
+    toggleClassZoom()
+  }
+})
+
 
 // let nameInput = formElement.querySelector('.popup__input_name');
 // let jobInput = formElement.querySelector('.popup__input_job');
@@ -95,16 +140,6 @@ const initialCards = [
     }
   ];
 
-const cardTemplate = document.querySelector('.card_template').content;
-const cardName = cardTemplate.querySelector('.place__title');
-const cardImg = cardTemplate.querySelector('.place__image');
-const cardsList = document.querySelector('.elements');
-
-const openPopupZoom = cardTemplate.querySelector('.popupZoom-open');
-const popupZoom = document.querySelector('.popupZoom');
-const closepopupZoom = popupZoom.querySelector('.popupZoom__button-close');
-const popupZoomImgName = popupZoom.querySelector('.popupZoom__title');
-const popupZoomImgLink = popupZoom.querySelector('.popupZoom__img');
 
 function renderCards() {
 	initialCards.forEach(renderCard);

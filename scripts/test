@@ -1,93 +1,237 @@
-// Вынесем все необходимые элементы формы в константы
-// const formElement = document.querySelector('.popup__container');
-// const formInput = formElement.querySelector('.popup__input_name');
+let openPopup = document.querySelector('.popup-open');
+let popup = document.querySelector('.popup');
+let closePopup = document.querySelector('.popup__button-close');
 
-// console.log(nameInput.id);
-const inputElement = formElement.querySelector('.popup__input');
-// Функция, которая добавляет класс с ошибкой
-const showInputError = (formElement, inputElement, errorMessage) => {
-    const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+let profileContainer = document.querySelector('.profile__info');
+let editName = profileContainer.querySelector('.profile__name');
+let editProf = profileContainer.querySelector('.profile__profession');
 
-    inputElement.classList.add('popup__input_type_error');
-    errorElement.textContent = errorMessage;
-    errorElement.classList.add('form__input-error_active');
-  };
-  
-  // Функция, которая удаляет класс с ошибкой
-  const hideInputError = (formElement, inputElement,) => {
-    const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+let formElement = document.querySelector('.popup__container');
+let nameInput = formElement.querySelector('.popup__input_name');
+let jobInput = formElement.querySelector('.popup__input_job');
 
-    inputElement.classList.remove('popup__input_type_error');
-    errorElement.classList.remove('form__input-error_active');
-    errorElement.textContent = '';
-  };
-  
-  // Функция, которая проверяет валидность поля
-  const isValid = (formElement, inputElement) => {
-    if (!inputElement.validity.valid) {
-      // Если поле не проходит валидацию, покажем ошибку
-      showInputError(formElement, inputElement, inputElement.validationMessage);
-    } else {
-      // Если проходит, скроем
-      hideInputError(formElement, inputElement);
-    }
-  };
+let openPopupNC = document.querySelector('.popupNC-open');
+let popupNewCard = document.querySelector('.popupNewCard');
+let closepopupNewCard = document.querySelector('.popupNewCard__button-close');
 
-  const setEventListeners = (formElement) => {
-    // Находим все поля внутри формы,
-    // сделаем из них массив методом Array.from
-    const inputList1 = Array.from(formElement.querySelectorAll('.popup__input'));
-    // Обойдём все элементы полученной коллекции
-    inputList1.forEach((inputElement) => {
-      // каждому полю добавим обработчик события input
-      inputElement.addEventListener('input', () => {
-        // Внутри колбэка вызовем isValid,
-        // передав ей форму и проверяемый элемент
-        isValid(formElement, inputElement);
-      });
-    });
+let newCardformElement = document.querySelector('.popupNewCard__container');
+let newCardNameInput = newCardformElement.querySelector('.popupNewCard__input_name');
+let newCardLinkInput = newCardformElement.querySelector('.popupNewCard__input_link');
 
-    const inputList2 = Array.from(formElement.querySelectorAll('.popupNewCard__input'));
-    // Обойдём все элементы полученной коллекции
-    inputList2.forEach((inputElement) => {
-      // каждому полю добавим обработчик события input
-      inputElement.addEventListener('input', () => {
-        // Внутри колбэка вызовем isValid,
-        // передав ей форму и проверяемый элемент
-        isValid(formElement, inputElement);
-    });
-  });
+const cardTemplate = document.querySelector('.card_template').content;
+const cardName = cardTemplate.querySelector('.place__title');
+const cardImg = cardTemplate.querySelector('.place__image');
+const cardsList = document.querySelector('.elements');
+
+const openPopupZoom = cardTemplate.querySelector('.popupZoom-open');
+const popupZoom = document.querySelector('.popupZoom');
+const closepopupZoom = popupZoom.querySelector('.popupZoom__button-close');
+const popupZoomImgName = popupZoom.querySelector('.popupZoom__title');
+const popupZoomImgLink = popupZoom.querySelector('.popupZoom__img');
+
+// openPopup.addEventListener('click', function() {
+//     popup.classList.add('popup_opened');
+// })
+
+// closePopup.addEventListener('click', function() {
+//     popup.classList.remove('popup_opened');
+// })
+
+// Включаем/выкл попап редактирования
+openPopup.addEventListener('click', toggleClass)
+closePopup.addEventListener('click', toggleClass)
+
+// Закрытие попапов нажатием на Esc
+document.addEventListener('keydown', function(event) {
+  if (event.keyCode === 27) {
+    popup.classList.remove('popup_opened');
+    popupNewCard.classList.remove('popupNewCard_opened');
+    popupZoom.classList.remove('popupZoom_opened');
   }
+})
 
-  const submitButtonState = (inputElement) => {
-    const submitButton = document.querySelectorAll('.button');
+// Закрытие попапа EDIT нажатием на свобоное пространство вокруг попапа
+function toggleClass() {
+  popup.classList.toggle('popup_opened');
+}
 
-    if (!inputElement.validity.valid) {
-      submitButton.classList.add('button_invalid');
-      submitButton.classList.remove('popup__button-save');
-      submitButton.setAttribute('disabled', 'disabled');
-    } else {
-      submitButton.classList.add('popup__button-save');
-      submitButton.classList.remove('button_invalid');
-      submitButton.removeAttribute('disabled');
+popup.addEventListener('click', function(event) {
+    // console.log('target: ', event.target)
+    // console.log('currentTarget: ', event.currentTarget)
+    if (event.target === event.currentTarget) {
+        toggleClass()
     }
-  };
+})
 
-  const enableValidation = () => {
-    // Найдём все формы с указанным классом в DOM,
-    // сделаем из них массив методом Array.from
-    const formList = Array.from(document.querySelectorAll('.form'));
-  
-    // Переберём полученную коллекцию
-    formList.forEach((formElement) => {
-      // Для каждой формы вызовем функцию setEventListeners,
-      // передав ей элемент формы
-      setEventListeners(formElement);
-    });
-    submitButtonState(inputElement);
-  };
-  
-  // Вызовем функцию
-  enableValidation(); 
+// Закрытие попапа CreateNC нажатием на свобоное пространство вокруг попапа
+function toggleClassPopupNC() {
+  popupNewCard.classList.toggle('popupNewCard_opened');
+}
 
-  // что значит внешний код/приватный код?
+popupNewCard.addEventListener('click', function(event) {
+  // console.log('target: ', event.target)
+  // console.log('currentTarget: ', event.currentTarget)
+  if (event.target === event.currentTarget) {
+    toggleClassPopupNC()
+  }
+})
+
+// Закрытие попапа Zoom нажатием на свобоное пространство вокруг попапа
+function toggleClassZoom() {
+  popupZoom.classList.toggle('popupZoom_opened');
+}
+
+popupZoom.addEventListener('click', function(event) {
+  // console.log('target: ', event.target)
+  // console.log('currentTarget: ', event.currentTarget)
+  if (event.target === event.currentTarget) {
+    toggleClassZoom()
+  }
+})
+
+
+// let nameInput = formElement.querySelector('.popup__input_name');
+// let jobInput = formElement.querySelector('.popup__input_job');
+
+nameInput.value = 'Жак-Ив Кусто';
+jobInput.value = 'Исследователь океана';
+
+// Находим форму в DOM
+// Находим поля формы в DOM
+// Обработчик «отправки» формы, хотя пока
+// она никуда отправляться не будет
+function handleFormSubmit (evt) {
+    evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
+    // Получите значение полей jobInput и nameInput из свойства value
+    // Выберите элементы, куда должны быть вставлены значения полей
+    // Вставьте новые значения с помощью textContent
+    editName.textContent = nameInput.value;
+    editProf.textContent = jobInput.value;
+     toggleClass();
+}
+// Прикрепляем обработчик к форме:
+// он будет следить за событием “submit” - «отправка»
+formElement.addEventListener('submit', handleFormSubmit);
+
+const initialCards = [
+    {
+      name: 'Архыз',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+    },
+    {
+      name: 'Челябинская область',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+    },
+    {
+      name: 'Иваново',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+    },
+    {
+      name: 'Камчатка',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+    },
+    {
+      name: 'Холмогорский район',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+    },
+    {
+      name: 'Байкал',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+    }
+  ];
+
+
+function renderCards() {
+	initialCards.forEach(renderCard);
+}
+
+function renderCard(card) {
+	const htmlElement = cardTemplate.cloneNode(true);
+	htmlElement.querySelector('.place__title').textContent = card.name;
+  htmlElement.querySelector('.place__image').src = card.link;
+  const deleteButton = htmlElement.querySelector('.place__delete');
+  const likeButton = htmlElement.querySelector('.place__like');
+  const openPopupZoom = htmlElement.querySelector('.popupZoom-open');
+
+  openPopupZoom.addEventListener('click', openPopupImgZoom);
+  deleteButton.addEventListener('click', handleDelete);
+  likeButton.addEventListener('click', handleLike);
+
+	cardsList.prepend(htmlElement);
+}
+
+openPopupNC.addEventListener('click', toggleClassNewCard);
+closepopupNewCard.addEventListener('click', toggleClassNewCard);
+
+function toggleClassNewCard() {
+  popupNewCard.classList.toggle('popupNewCard_opened');
+}
+
+// function toggleClassImgZoom(evt) {
+//   popupZoom.classList.toggle('popupZoom_opened');
+//   popupZoomImgName.textContent = evt.currentTarget.parentElement.textContent;
+//   popupZoomImgLink.src = evt.currentTarget.src;
+// }
+
+function openPopupImgZoom(evt) {
+  popupZoom.classList.add('popupZoom_opened');
+  popupZoomImgName.textContent = evt.currentTarget.parentElement.textContent;
+  popupZoomImgLink.src = evt.currentTarget.src;
+}
+
+function closePopupImgZoom(evt) {
+  popupZoom.classList.remove('popupZoom_opened');
+}
+
+closepopupZoom.addEventListener('click', closePopupImgZoom);
+
+function handleSubmit(evt) {
+  evt.preventDefault();
+
+  const newcard = { 
+    name: newCardNameInput.value,
+    link: newCardLinkInput.value
+  };
+  renderCard(newcard);
+  
+  newCardNameInput.value = '';
+  newCardLinkInput.value = '';
+
+  toggleClassNewCard();
+}
+
+function handleDelete(evt) {
+	evt.target.closest('.place').remove();
+}
+
+function handleLike(evt) {
+	evt.target.classList.toggle('place__like_active');
+}
+
+newCardformElement.addEventListener('submit', handleSubmit);
+
+
+renderCards();
+
+
+
+// 1) добавить 6 карточек из коробки +
+// 2) Добавьте в проект форму добавления новой карточки. Макет найдёте в «Фигме».
+// Сделайте так, чтобы форма открывалась нажатием на кнопку «+» и
+// закрывалась кликом на крестик +
+// 3) Дайте пользователю возможность добавлять карточки:
+// что бы Можно было написать имя карточки и дать ссылку на картинку.
+// Сделайте так, чтобы при клике на «сохранить» новая карточка попадала 
+// в начало контейнера с ними.
+//  А диалоговое окно после добавления автоматически закрывалось.
+// Чтобы создавать новые карточки, добавьте обработчик событий submit. 
+// Сделайте это аналогично прошлому спринту, в котором вы настраивали 
+// редактирование информации о пользователе. +
+// 4) Сделайте так, чтобы карточки можно было лайкать:
+// Если лайкнуть карточку, сердечко поменяет цвет. +
+// 5) Добавьте карточкам иконку удаления. 
+// настройте, чтобы карточка удалялась при клике на эту иконку +
+// 6) Настройте просмотр фотографий. Пусть открываются нажатием на картинку 
+// и закрываются кликом на крестик +
+// 7) Сделайте так, чтобы все попапы плавно открывались. Пусть проявляются 
+// из прозрачности и уходят в неё при закрытии +
