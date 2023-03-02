@@ -54,27 +54,32 @@ class Card {
     _setEventListeners() {
         this._element.querySelector('.place__like').addEventListener('click', () => this._handleLike());
         this._element.querySelector('.place__delete').addEventListener('click', () => this._handleDelete());
-        }
+        this._element.querySelector('.place__image').addEventListener('click', () => this._handleOpenPopup());
+        this._element.querySelector('.popupZoom__button-close').addEventListener('click', () => this._handleClosePopup());
+    }
 
     _handleLike() {
         this._element.querySelector('.place__like').classList.toggle('place__like_active');
     }
 
     _handleDelete() {
-        this._element.querySelector('.place').closest('.place').remove();
+        this._element.querySelector('.card_template').closest('.place').remove();
+    }
+
+    _handleOpenPopup() {
+        this._element.querySelector('.popup-open').classList.add('popup_opened');
+        this._element.querySelector('.popupZoom__title').textContent = this._text.currentTarget.parentElement.textContent;
+        this._element.querySelector('.popupZoom__img').src = this._image.currentTarget.src;
+    }
+
+    _handleClosePopup() {
+        this._element.querySelector('.popup-open').classList.remove('popup_opened');
     }
 }
-
-    // function handleLike(evt) {
-    //     evt.target.classList.toggle('place__like_active');
-    //   }
-    // function handleDelete(evt) {
-    //     evt.target.closest('.place').remove();
-    //   }
 
 initialCards.forEach((item) => {
     const card = new Card(item, '.card_template');
     const cardItem = card.generateCard();
-    
+
     cardsList.prepend(cardItem);
-  });
+});
