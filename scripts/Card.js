@@ -28,29 +28,45 @@ const initialCards = [
 ];
 
 class Card {
-    constructor(image, text) {
-        this._image = image;
-        this._text = text;
+    constructor(data, templateSelector) {
+        this._image = data.link;
+        this._text = data.name;
+        this._templateSelector = templateSelector;
     }
 
     _getTemplate() {
-        const cardTemplate = document.querySelector('.card_template').content;
+        const cardTemplate = document.querySelector(this._templateSelector).content;
         const newCardTemplate = cardTemplate.cloneNode(true);
 
         return newCardTemplate;
     }
+
     generateCard() {
         this._element = this._getTemplate();
+        this._setEventListeners();
 
         this._element.querySelector('.place__image').src = this._image;
         this._element.querySelector('.place__title').textContent = this._text;
 
         return this._element;
     }
+
+    _setEventListeners() {
+        this._element.querySelector('.place__like').addEventListener('click', () => this._handleLike());
+        }
+
+    _handleLike() {
+        this._element.querySelector('.place__like').classList.toggle('place__like_active');
+    }
 }
 
+    // function handleLike(evt) {
+    //     evt.target.classList.toggle('place__like_active');
+    //   }
+
+
 initialCards.forEach((item) => {
-    const card = new Card(item.link, item.name);
+    const card = new Card(item, '.card_template');
     const cardItem = card.generateCard();
     
     cardsList.prepend(cardItem);
