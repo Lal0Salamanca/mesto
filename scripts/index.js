@@ -136,13 +136,13 @@ formElement.addEventListener('submit', handleFormSubmit);
 openPopupNC.addEventListener('click', () => toggleClass(popupNewCard));
 closepopupNewCard.addEventListener('click', () => toggleClass(popupNewCard));
 
-function openPopupImgZoom(evt) {
-  toggleClass(popupZoom);
-  popupZoomImgName.textContent = evt.currentTarget.parentElement.textContent;
-  popupZoomImgLink.src = evt.currentTarget.src;
-}
+// function openPopupImgZoom(evt) {
+//   toggleClass(popupZoom);
+//   popupZoomImgName.textContent = evt.currentTarget.parentElement.textContent;
+//   popupZoomImgLink.src = evt.currentTarget.src;
+// }
 
-closepopupZoom.addEventListener('click', () => toggleClass(popupZoom));
+// closepopupZoom.addEventListener('click', () => toggleClass(popupZoom));
 
 function handleSubmit(evt) {
   evt.preventDefault();
@@ -159,13 +159,13 @@ function handleSubmit(evt) {
   toggleClassNewCard();
 }
 
-function handleDelete(evt) {
-  evt.target.closest('.place').remove();
-}
+// function handleDelete(evt) {
+//   evt.target.closest('.place').remove();
+// }
 
-function handleLike(evt) {
-  evt.target.classList.toggle('place__like_active');
-}
+// function handleLike(evt) {
+//   evt.target.classList.toggle('place__like_active');
+// }
 
 newCardformElement.addEventListener('submit', handleSubmit);
 

@@ -1,5 +1,7 @@
 const cardsList = document.querySelector('.elements');
 
+const popupZoom = document.querySelector('.popupZoom');
+
 const initialCards = [
     {
         name: 'Архыз',
@@ -36,7 +38,7 @@ class Card {
 
     _getTemplate() {
         const cardTemplate = document.querySelector(this._templateSelector).content;
-        const newCardTemplate = cardTemplate.cloneNode(true);
+        const newCardTemplate = cardTemplate.querySelector('.place').cloneNode(true);
 
         return newCardTemplate;
     }
@@ -54,8 +56,8 @@ class Card {
     _setEventListeners() {
         this._element.querySelector('.place__like').addEventListener('click', () => this._handleLike());
         this._element.querySelector('.place__delete').addEventListener('click', () => this._handleDelete());
-        // this._element.querySelector('.place__image').addEventListener('click', () => this._handleOpenPopup());
-        // this._element.querySelector('.popupZoom__button-close').addEventListener('click', () => this._handleClosePopup());
+        this._element.querySelector('.place__image').addEventListener('click', () => this._handleOpenPopup());
+        popupZoom.querySelector('.popupZoom__button-close').addEventListener('click', () => this._handleClosePopup());
     }
 
     _handleLike() {
@@ -63,18 +65,18 @@ class Card {
     }
 
     _handleDelete() {
-        this._element.querySelector('.card_template').closest('.place').remove();
+        this._element.closest('.place').remove();
     }
 
-    // _handleOpenPopup() {
-    //     this._element.querySelector('.popupZoom__title').textContent = this._text.currentTarget.parentElement.textContent;
-    //     this._element.querySelector('.popupZoom__img').src = this._image.currentTarget.src;
-    //     this._element.querySelector('.popup-open').classList.add('popup_opened');
-    // }
+    _handleOpenPopup() {
+        popupZoom.classList.add('popup_opened');
+        popupZoom.querySelector('.popupZoom__title').textContent = this._text;
+        popupZoom.querySelector('.popupZoom__img').src = this._image;
+    }
 
-    // _handleClosePopup() {
-    //     this._element.querySelector('.popup-open').classList.remove('popup_opened');
-    // }
+    _handleClosePopup() {
+        popupZoom.classList.remove('popup_opened');
+    }
 }
 
 initialCards.forEach((item) => {
