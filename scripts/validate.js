@@ -38,7 +38,6 @@ const isValid = (form, elementInput) => {
 // добавляем слушатель одном полю
 // elementInput.addEventListener('input', isValid);
 
-
 // одному полю мало, надо слушательли всем полям формы
 const setEventListeners = (form) => {
   // Находим все поля внутри формы,
@@ -70,7 +69,7 @@ const hasInvalidInput = (inputList) => {
     // hasInvalidInput вернёт true
     return !elementInput.validity.valid;
   })
-}; 
+};
 
 // функция состояния кнопки отправки формы
 const toggleButtonState = (inputList, buttonElement) => {

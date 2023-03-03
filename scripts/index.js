@@ -1,4 +1,5 @@
 import { Card } from './Card.js';
+// import { FormValidator } from './FormValidator.js';
 
 let openPopup = document.querySelector('.popup-open');
 const popupEdit = document.querySelector('.popup_edit');
@@ -26,7 +27,7 @@ const cardImg = cardTemplate.querySelector('.place__image');
 const cardsList = document.querySelector('.elements');
 
 const openPopupZoom = cardTemplate.querySelector('.popupZoom-open');
-const popupZoom = document.querySelector('.popupZoom');
+export const popupZoom = document.querySelector('.popupZoom');
 const closepopupZoom = popupZoom.querySelector('.popupZoom__button-close');
 const popupZoomImgName = popupZoom.querySelector('.popupZoom__title');
 const popupZoomImgLink = popupZoom.querySelector('.popupZoom__img');
@@ -137,7 +138,6 @@ function handleSubmit(evt) {
   const cardItem = card.generateCard();
 
   cardsList.prepend(cardItem);
-
 
   newCardNameInput.value = '';
   newCardLinkInput.value = '';

@@ -1,4 +1,4 @@
-const popupZoom = document.querySelector('.popupZoom');
+import { popupZoom } from './index.js';
 
 export class Card {
     constructor(data, templateSelector) {
