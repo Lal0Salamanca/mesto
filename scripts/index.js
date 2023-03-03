@@ -1,3 +1,5 @@
+import { Card } from './Card.js';
+
 let openPopup = document.querySelector('.popup-open');
 const popupEdit = document.querySelector('.popup_edit');
 let closePopup = document.querySelector('.popup__button-close');
@@ -85,33 +87,115 @@ function handleFormSubmit(evt) {
 // он будет следить за событием “submit” - «отправка»
 formElement.addEventListener('submit', handleFormSubmit);
 
-// const initialCards = [
-//   {
-//     name: 'Архыз',
-//     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-//   },
-//   {
-//     name: 'Челябинская область',
-//     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-//   },
-//   {
-//     name: 'Иваново',
-//     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-//   },
-//   {
-//     name: 'Камчатка',
-//     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-//   },
-//   {
-//     name: 'Холмогорский район',
-//     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-//   },
-//   {
-//     name: 'Байкал',
-//     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-//   }
-// ];
+const initialCards = [
+  {
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  }
+];
 
+openPopupNC.addEventListener('click', () => toggleClass(popupNewCard));
+closepopupNewCard.addEventListener('click', () => toggleClass(popupNewCard));
+
+// проходим по массиву с данными, создаем и вставляем карточки в дом дерево
+initialCards.forEach((item) => {
+  const card = new Card(item, '.card_template');
+  const cardItem = card.generateCard();
+
+  cardsList.prepend(cardItem);
+});
+
+function handleSubmit(evt) {
+  evt.preventDefault();
+
+  class NewCard extends Card {
+    constructor(data, templateSelector) {
+      super(templateSelector);
+      this._image = data.link;
+      this._text = data.name;
+    }
+
+    _getTemplate() {
+      const cardTemplate = document.querySelector(this._templateSelector).content;
+      const newCardTemplate = cardTemplate.querySelector('.place').cloneNode(true);
+
+      return newCardTemplate;
+    }
+
+    generateCard() {
+      this._element = super._getTemplate();
+      super._setEventListeners();
+
+      this._element.querySelector('.place__image').src = newCardLinkInput.value;
+      this._element.querySelector('.place__title').textContent = newCardNameInput.value;
+
+      return this._element;
+    }
+
+    _setEventListeners() {
+      this._element.querySelector('.place__like').addEventListener('click', () => this._handleLike());
+      this._element.querySelector('.place__delete').addEventListener('click', () => this._handleDelete());
+      this._element.querySelector('.place__image').addEventListener('click', () => this._handleOpenPopup());
+      popupZoom.querySelector('.popupZoom__button-close').addEventListener('click', () => this._handleClosePopup());
+    }
+
+    _handleLike() {
+      this._element.querySelector('.place__like').classList.toggle('place__like_active');
+    }
+
+    _handleDelete() {
+      this._element.closest('.place').remove();
+    }
+
+    _handleOpenPopup() {
+      popupZoom.classList.add('popup_opened');
+      popupZoom.querySelector('.popupZoom__title').textContent = this._text;
+      popupZoom.querySelector('.popupZoom__img').src = this._image;
+    }
+
+    _handleClosePopup() {
+      popupZoom.classList.remove('popup_opened');
+    }
+
+  }
+}
+
+newCardformElement.addEventListener('submit', handleSubmit);
+
+// function handleSubmit(evt) {
+//   evt.preventDefault();
+
+//   const newcard = {
+//     name: newCardNameInput.value,
+//     link: newCardLinkInput.value
+//   };
+//   renderCard(newcard);
+
+//   newCardNameInput.value = '';
+//   newCardLinkInput.value = '';
+
+//   toggleClassNewCard();
+// }
 
 // function renderCards() {
 //   initialCards.forEach(renderCard);
@@ -132,10 +216,6 @@ formElement.addEventListener('submit', handleFormSubmit);
 //   cardsList.prepend(htmlElement);
 // }
 
-
-openPopupNC.addEventListener('click', () => toggleClass(popupNewCard));
-closepopupNewCard.addEventListener('click', () => toggleClass(popupNewCard));
-
 // function openPopupImgZoom(evt) {
 //   toggleClass(popupZoom);
 //   popupZoomImgName.textContent = evt.currentTarget.parentElement.textContent;
@@ -143,21 +223,6 @@ closepopupNewCard.addEventListener('click', () => toggleClass(popupNewCard));
 // }
 
 // closepopupZoom.addEventListener('click', () => toggleClass(popupZoom));
-
-function handleSubmit(evt) {
-  evt.preventDefault();
-
-  const newcard = {
-    name: newCardNameInput.value,
-    link: newCardLinkInput.value
-  };
-  renderCard(newcard);
-
-  newCardNameInput.value = '';
-  newCardLinkInput.value = '';
-
-  toggleClassNewCard();
-}
 
 // function handleDelete(evt) {
 //   evt.target.closest('.place').remove();
@@ -167,7 +232,4 @@ function handleSubmit(evt) {
 //   evt.target.classList.toggle('place__like_active');
 // }
 
-newCardformElement.addEventListener('submit', handleSubmit);
-
-
-renderCards();
+// renderCards();
