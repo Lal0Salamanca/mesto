@@ -47,7 +47,7 @@ document.addEventListener('keydown', function (event) {
   }
 })
 
-// Закрытие попапа EDIT нажатием на свобоное пространство вокруг попапа
+// функция открытия/закрытия какого либо из попапов
 function toggleClass(popupToToggle) {
   popupToToggle.classList.toggle('popup_opened');
 }
@@ -147,6 +147,15 @@ function handleSubmit(evt) {
 }
 
 newCardformElement.addEventListener('submit', handleSubmit);
+
+export const vConfig = {
+  formSelector: '.form', //общий класс для всех форм настоящих и будущих, которые мы хотим валидировать
+  inputSelector: '.form__input', //общий класс для всех инпутов в формах которые мы хотим валидировать
+  submitButtonSelector: '.form__button', //общий класс для всех кнопок сабмита в формах которые мы хотим валидировать
+  inactiveButtonClass: 'button_invalid', //класс стилизации неактивной "ЗАсереной" кнопки
+  inputErrorClass: 'popup__input_type_error', //класс стилизация красной линии
+  errorClass: 'form__input-error_active' //класс стилизация красного текста ошибки
+};
 
 // function handleSubmit(evt) {
 //   evt.preventDefault();
