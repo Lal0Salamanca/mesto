@@ -2,50 +2,51 @@ import { vConfig } from './index.js';
 
 export class FormValidator {
     constructor(vConfig, form) {
-        this.form = form;
-        this.button = this.form.querySelector(vConfig.submitButtonSelector);
-        this.inputs = Array.from(form.querySelectorAll(vConfig.inputSelector));
-        this.config = vConfig;
-        this.errorElement = this.form.querySelector(`.${input.id}-error`);
+        this._form = form;
+        this._button = this._form.querySelector(vConfig.submitButtonSelector);
+        this._inputs = Array.from(form.querySelectorAll(vConfig.inputSelector));
+        this._config = vConfig;
     }
 
     _showInputError(input) {
-        input.classList.add(vConfig.inputErrorClass);
-        this.errorElement.textContent = errorMessage;
-        this.errorElement.classList.add(vConfig.errorClass);
+        const errorElement = this._form.querySelector(`.${input.id}-error`);
+        input.classList.add(this._config.inputErrorClass);
+        errorElement.textContent = input.validationMessage;
+        errorElement.classList.add(this._config.errorClass);
     }
 
     _hideInputError(input) {
-        input.classList.remove(vConfig.inputErrorClass);
-        this.errorElement.textContent = '';
-        this.errorElement.classList.remove(vConfig.errorClass);
+        const errorElement = this._form.querySelector(`.${input.id}-error`);
+        input.classList.remove(this._config.inputErrorClass);
+        errorElement.textContent = '';
+        errorElement.classList.remove(this._config.errorClass);
     }
 
     _validateInput(input) {
         if (input.validity.valid) {
-            _hideInputError(input);
+            this._hideInputError(input);
         } else {
-            _showInputError(input);
+            this._showInputError(input);
         }
     }
 
     _hasInvalidInputs() {
-        return this.inputs.every(input => input.validity.valid);
+        return this._inputs.every(input => input.validity.valid);
     }
 
     _toggleButtonState() {
-        if (this._hasInvalidInputs(inputs)) {
-            button.classList.remove(vConfig.inactiveButtonClass);
-            button.disabled = false;
+        if (this._hasInvalidInputs()) {
+            this._button.classList.remove(this._config.inactiveButtonClass);
+            this._button.disabled = false;
         } else {
-            button.classList.add(vConfig.inactiveButtonClass);
-            button.disabled = true;
+            this._button.classList.add(this._config.inactiveButtonClass);
+            this._button.disabled = true;
         }
     }
 
     _setInputListeners() {
-        this.inputs.forEach(input => {
-            input.addEventListener('input', e => {
+        this._inputs.forEach(input => {
+                input.addEventListener('input', e => {
                 this._validateInput(input);
                 this._toggleButtonState();
             })
@@ -57,7 +58,7 @@ export class FormValidator {
     }
 
     enableValidation() {
-        this.form.addEventListener('submit', this._preventFormSubmit);
+        this._form.addEventListener('submit', () => this._preventFormSubmit);
 
         this._setInputListeners();
     }

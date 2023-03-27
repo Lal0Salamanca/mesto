@@ -163,10 +163,10 @@ export const vConfig = {
   errorClass: 'form__input-error_active' //класс стилизация красного текста ошибки
 };
 
-const validateFormNC = new FormValidator(vConfig, '.popupNewCard__container');
+const validateFormNC = new FormValidator(vConfig, newCardformElement);
 validateFormNC.enableValidation();
 
-const validateFormEdit = new FormValidator(vConfig, '.popup__container');
+const validateFormEdit = new FormValidator(vConfig, formElement);
 validateFormEdit.enableValidation();
 
 // function handleSubmit(evt) {
