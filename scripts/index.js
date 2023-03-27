@@ -1,5 +1,5 @@
 import { Card } from './Card.js';
-// import { FormValidator } from './FormValidator.js';
+import { FormValidator } from './FormValidator.js';
 
 let openPopup = document.querySelector('.popup-open');
 const popupEdit = document.querySelector('.popup_edit');
@@ -66,6 +66,12 @@ function closePopupOverlay() {
 }
 
 closePopupOverlay();
+
+// подготовка формы попапа к открытию
+function prepareForm(form, ) {
+  validateInput();
+  toggleButtonState();
+}
 
 nameInput.value = 'Жак-Ив Кусто';
 jobInput.value = 'Исследователь океана';
@@ -156,6 +162,12 @@ export const vConfig = {
   inputErrorClass: 'popup__input_type_error', //класс стилизация красной линии
   errorClass: 'form__input-error_active' //класс стилизация красного текста ошибки
 };
+
+const validateFormNC = new FormValidator(vConfig, '.popupNewCard__container');
+const validateFNC = validateFormNC.enableValidation();
+
+const validateFormEdit = new FormValidator(vConfig, '.popup__container');
+const validateFEdit = validateFormEdit.enableValidation();
 
 // function handleSubmit(evt) {
 //   evt.preventDefault();
