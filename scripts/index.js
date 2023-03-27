@@ -164,10 +164,10 @@ export const vConfig = {
 };
 
 const validateFormNC = new FormValidator(vConfig, '.popupNewCard__container');
-const validateFNC = validateFormNC.enableValidation();
+validateFormNC.enableValidation();
 
 const validateFormEdit = new FormValidator(vConfig, '.popup__container');
-const validateFEdit = validateFormEdit.enableValidation();
+validateFormEdit.enableValidation();
 
 // function handleSubmit(evt) {
 //   evt.preventDefault();
