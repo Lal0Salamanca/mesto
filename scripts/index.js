@@ -32,8 +32,32 @@ const closepopupZoom = popupZoom.querySelector('.popupZoom__button-close');
 const popupZoomImgName = popupZoom.querySelector('.popupZoom__title');
 const popupZoomImgLink = popupZoom.querySelector('.popupZoom__img');
 
+// функция подготовки формы попапа РЕДАКТИРОВАНИЯ к открытию (очишение текста инпутов,
+// удаление классов ошибок, кнопка активна)
+function prepareFormEdit(popup, config) {
+  const inputList = Array.from(popup.querySelectorAll(config.inputSelector));
+  const submitButton = popup.querySelector(config.submitButtonSelector);
+  const errorElementList = Array.from(popup.querySelectorAll('.form__input-error'));
+
+  inputList.forEach(input => {
+    nameInput.textContent = editName.value;
+    jobInput.textContent = editProf.value;
+    input.classList.remove(config.inputErrorClass);
+    }
+  );
+
+  errorElementList.forEach(errorElement => {
+    errorElement.classList.remove(config.errorClass);
+    }
+  );
+
+  submitButton.classList.remove(config.inactiveButtonClass);
+  submitButton.disabled = false;
+}
+
 // Включаем/выкл попап редактирования
 openPopup.addEventListener('click', function () {
+  prepareFormEdit(popupEdit, vConfig);
   toggleClass(popupEdit);
 })
 closePopup.addEventListener('click', () => toggleClass(popupEdit));
@@ -66,12 +90,6 @@ function closePopupOverlay() {
 }
 
 closePopupOverlay();
-
-// подготовка формы попапа к открытию
-function prepareForm(form, ) {
-  validateInput();
-  toggleButtonState();
-}
 
 nameInput.value = 'Жак-Ив Кусто';
 jobInput.value = 'Исследователь океана';
@@ -121,7 +139,33 @@ const initialCards = [
   }
 ];
 
-openPopupNC.addEventListener('click', () => toggleClass(popupNewCard));
+// функция подготовки формы попапа создания НОВОЙ КАРТОЧКИ к открытию (очишение текста инпутов,
+// удаление классов ошибок, кнопка активна)
+function prepareFormNC(popup, config) {
+  const inputList = Array.from(popup.querySelectorAll(config.inputSelector));
+  const submitButton = popup.querySelector(config.submitButtonSelector);
+  const errorElementList = Array.from(popup.querySelectorAll('.form__input-error'));
+
+  inputList.forEach(input => {
+    input.value = '';
+    input.classList.remove(config.inputErrorClass);
+    }
+  );
+
+  errorElementList.forEach(errorElement => {
+    errorElement.classList.remove(config.errorClass);
+    }
+  );
+
+  submitButton.classList.remove(config.inactiveButtonClass);
+  submitButton.disabled = false;
+}
+
+// открытие попапа новой карточки
+openPopupNC.addEventListener('click', function() {
+  prepareFormNC(popupNewCard, vConfig);
+  toggleClass(popupNewCard);
+});
 closepopupNewCard.addEventListener('click', () => toggleClass(popupNewCard));
 
 // проходим по массиву с данными, создаем и вставляем карточки в дом дерево
@@ -149,7 +193,6 @@ function handleSubmit(evt) {
   newCardLinkInput.value = '';
 
   toggleClass(popupNewCard);
-
 }
 
 newCardformElement.addEventListener('submit', handleSubmit);
