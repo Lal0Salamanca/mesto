@@ -40,8 +40,6 @@ function prepareFormEdit(popup, config) {
   const errorElementList = Array.from(popup.querySelectorAll('.form__input-error'));
 
   inputList.forEach(input => {
-    nameInput.textContent = editName.value;
-    jobInput.textContent = editProf.value;
     input.classList.remove(config.inputErrorClass);
     }
   );
