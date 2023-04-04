@@ -1,4 +1,4 @@
-import { popupZoom } from './index.js';
+import { popupZoom } from '../index.js';
 
 export class Card {
     constructor(data, templateSelector) {

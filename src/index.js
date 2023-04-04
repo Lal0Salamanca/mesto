@@ -1,6 +1,6 @@
-import { Card } from './Card.js';
-import { FormValidator } from './FormValidator.js';
-import '/src/index.css'; // добавьте импорт главного файла стилей 
+import { Card } from './components/Card.js';
+import { FormValidator } from './components/FormValidator.js';
+import './pages/index.css'; // добавьте импорт главного файла стилей
 
 let openPopup = document.querySelector('.popup-open');
 const popupEdit = document.querySelector('.popup_edit');

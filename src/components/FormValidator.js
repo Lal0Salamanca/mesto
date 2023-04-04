@@ -1,4 +1,4 @@
-import { vConfig } from './index.js';
+import { vConfig } from '../index.js';
 
 export class FormValidator {
     constructor(vConfig, form) {

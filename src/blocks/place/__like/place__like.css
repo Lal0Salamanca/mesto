@@ -3,7 +3,7 @@
     width: 22px;
     padding: 0;
     background-color: transparent;
-    background: url(/images/heart_disabled.svg);
+    background: url(/src/images/heart_disabled.svg);
     border: 0;
     cursor: pointer;
 }

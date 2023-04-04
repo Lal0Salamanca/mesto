@@ -3,7 +3,7 @@
     height: 19px;
     margin-right: 0;
     /* margin-left: 15px; */
-    background: url(/images/heart.svg);
+    background: url(/src/images/heart.svg);
     border: 0;
     cursor: pointer;
 }
