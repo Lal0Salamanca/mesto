@@ -1,5 +1,6 @@
 import { Card } from './components/Card.js';
 import { FormValidator } from './components/FormValidator.js';
+import { CardsSection } from './components/CardsSection.js';
 import './pages/index.css'; // добавьте импорт главного файла стилей
 
 let openPopup = document.querySelector('.popup-open');
@@ -33,7 +34,9 @@ const closepopupZoom = popupZoom.querySelector('.popupZoom__button-close');
 const popupZoomImgName = popupZoom.querySelector('.popupZoom__title');
 const popupZoomImgLink = popupZoom.querySelector('.popupZoom__img');
 
-// функция подготовки формы попапа РЕДАКТИРОВАНИЯ к открытию (очишение текста инпутов,
+
+
+// функция подготовки формы ПОПАПА РЕДАКТИРОВАНИЯ к открытию (очишение текста инпутов,
 // удаление классов ошибок, кнопка активна)
 function prepareFormEdit(popup, config) {
   const inputList = Array.from(popup.querySelectorAll(config.inputSelector));
@@ -138,7 +141,18 @@ const initialCards = [
   }
 ];
 
-// функция подготовки формы попапа создания НОВОЙ КАРТОЧКИ к открытию (очишение текста инпутов,
+//класс который добавляет карточки в секцию для карточек
+const сardsSection = new CardsSection({
+  items: initialCards,
+  renderer: function(data) {
+    const card = new Card(data, '.card_template')
+    return card.generateCard();
+  }
+}, '.elements');
+
+сardsSection.render();
+
+// функция подготовки формы ПОПАПА СОЗДАНИЯ НОВОЙ КАРТОЧКИ к открытию (очишение текста инпутов,
 // удаление классов ошибок, кнопка активна)
 function prepareFormNC(popup, config) {
   const inputList = Array.from(popup.querySelectorAll(config.inputSelector));
@@ -167,14 +181,16 @@ openPopupNC.addEventListener('click', function() {
 });
 closepopupNewCard.addEventListener('click', () => toggleClass(popupNewCard));
 
+// ЗАМЕНИЛИ ЭТОТ СПОСОБ ДОБАВЛЕНИЯ ОТРИСОВКИ КАРТОЧЕК НА КЛАСС CardsSection
 // проходим по массиву с данными, создаем и вставляем карточки в дом дерево
-initialCards.forEach((item) => {
-  const card = new Card(item, '.card_template');
-  const cardItem = card.generateCard();
+// initialCards.forEach((item) => {
+//   const card = new Card(item, '.card_template');
+//   const cardItem = card.generateCard();
 
-  cardsList.prepend(cardItem);
-});
+//   cardsList.prepend(cardItem);
+// });
 
+// функция создания новой карточки
 function handleSubmit(evt) {
   evt.preventDefault();
 
@@ -182,11 +198,11 @@ function handleSubmit(evt) {
     name: newCardNameInput.value,
     link: newCardLinkInput.value
   };
-
   const card = new Card(newcard, '.card_template');
-  const cardItem = card.generateCard();
 
-  cardsList.prepend(cardItem);
+  сardsSection.addItem(card.generateCard());
+  // const cardItem = card.generateCard();
+  // cardsList.prepend(cardItem);
 
   newCardNameInput.value = '';
   newCardLinkInput.value = '';

@@ -27,7 +27,7 @@
     </header>
     <main class="content">
         <section class="profile">
-            <img src="./images/kysto.jpg" alt="Kysto_face_foto" class="profile__avatar">
+            <img src="<%=require('./images/kysto.jpg')%>" alt="Kysto_face_foto" class="profile__avatar">
             <div class="profile__info">
                 <div class="profile__name-container">
                     <p class="profile__name">Жак-Ив Кусто</p>
@@ -58,7 +58,7 @@
             <div class="place__name">
                 <p class="place__title"></p>
                 <button type="button" aria-label="Поставить лайк" class="place__like"></button>
-                <button type="button" aria-label="Удалить карточку" class="place__delete"><img src="./images/recycle bin.svg"></button>
+                <button type="button" aria-label="Удалить карточку" class="place__delete"><img src="<%=require('./images/recycle bin.svg')%>"></button>
             </div>
         </div>
     </template>
