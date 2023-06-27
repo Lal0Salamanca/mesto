@@ -58,40 +58,40 @@ function prepareFormEdit(popup, config) {
 }
 
 // Включаем/выкл попап редактирования
-openPopup.addEventListener('click', function () {
-  prepareFormEdit(popupEdit, vConfig);
-  toggleClass(popupEdit);
-})
-closePopup.addEventListener('click', () => toggleClass(popupEdit));
+// openPopup.addEventListener('click', function () {
+//   prepareFormEdit(popupEdit, vConfig);
+//   toggleClass(popupEdit);
+// })
+// closePopup.addEventListener('click', () => toggleClass(popupEdit));
 
 
 // Закрытие попапов нажатием на Esc
-document.addEventListener('keydown', function (event) {
-  if (event.keyCode === 27) {
-    const popupOpened = document.querySelector('.popup_opened');
-    toggleClass(popupOpened)
-  }
-})
+// document.addEventListener('keydown', function (event) {
+//   if (event.keyCode === 27) {
+//     const popupOpened = document.querySelector('.popup_opened');
+//     toggleClass(popupOpened)
+//   }
+// })
 
 // функция открытия/закрытия какого либо из попапов
-function toggleClass(popupToToggle) {
-  popupToToggle.classList.toggle('popup_opened');
-}
+// function toggleClass(popupToToggle) {
+//   popupToToggle.classList.toggle('popup_opened');
+// }
 
-// Закрытие попапов нажатием на overlay
-function closePopupOverlay() {
-  const popupList = Array.from(document.querySelectorAll('.popup'));
+// // Закрытие попапов нажатием на overlay
+// function closePopupOverlay() {
+//   const popupList = Array.from(document.querySelectorAll('.popup'));
 
-  popupList.forEach((popupItem) => {
-    popupItem.addEventListener('click', (event) => {
-      if (event.target === event.currentTarget) {
-        toggleClass(popupItem);
-      }
-    })
-  })
-}
+//   popupList.forEach((popupItem) => {
+//     popupItem.addEventListener('click', (event) => {
+//       if (event.target === event.currentTarget) {
+//         toggleClass(popupItem);
+//       }
+//     })
+//   })
+// }
 
-closePopupOverlay();
+// closePopupOverlay();
 
 nameInput.value = 'Жак-Ив Кусто';
 jobInput.value = 'Исследователь океана';
