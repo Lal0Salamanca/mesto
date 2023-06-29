@@ -4,15 +4,23 @@ function toggleClass(popup) {
 
 export class Popup {
     constructor(popupSelector) {
+        this._handleEscClose = this._handleEscClose.bind(this);
+        this._handleOverlayClose = this._handleOverlayClose.bind(this);
         this._popup = document.querySelector(popupSelector);
     }
 
+    removeEventListeners() {
+        document.removeEventListener('keydown', this._handleEscClose);
+      }
+
     open() {
         toggleClass(this._popup);
+        document.addEventListener('keydown', this._handleEscClose);
     }
 
     close() {
         toggleClass(this._popup);
+        this.removeEventListeners()
     }
 
     _handleEscClose(event) {
@@ -23,7 +31,7 @@ export class Popup {
     }
 
     _handleOverlayClose() {
-        const popupList = Array.from(document.querySelectorAll('.popup_opened'));
+        const popupList = Array.from(document.querySelectorAll('.popup'));
           
             popupList.forEach((popupItem) => {
               popupItem.addEventListener('click', (event) => {
@@ -35,8 +43,7 @@ export class Popup {
       }
 
     setEventListeners() {
-        document.addEventListener('keydown', () => this._handleEscClose());
-        document.addEventListener('click', () => this._handleOverlayClose());
+        document.addEventListener('click', this._handleOverlayClose);
         const closePopup = this._popup.querySelector('.button-close');
         closePopup.addEventListener('click', () => this.close());
     }

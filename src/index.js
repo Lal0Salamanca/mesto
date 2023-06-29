@@ -2,6 +2,7 @@ import { Card } from './components/Card.js';
 import { FormValidator } from './components/FormValidator.js';
 import { CardsSection } from './components/CardsSection.js';
 import './pages/index.css'; // добавьте импорт главного файла стилей
+import { Popup } from './components/Popup.js';
 
 let openPopup = document.querySelector('.popup-open');
 const popupEdit = document.querySelector('.popup_edit');
@@ -56,6 +57,11 @@ function prepareFormEdit(popup, config) {
   submitButton.classList.remove(config.inactiveButtonClass);
   submitButton.disabled = false;
 }
+
+const openPopupEdit = new Popup('.popup_edit');
+openPopupEdit.setEventListeners();
+openPopup.addEventListener('click', () => openPopupEdit.open());
+
 
 // Включаем/выкл попап редактирования
 // openPopup.addEventListener('click', function () {
