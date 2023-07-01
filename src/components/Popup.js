@@ -1,6 +1,6 @@
 function toggleClass(popup) {
     popup.classList.toggle('popup_opened');
-  }
+}
 
 export class Popup {
     constructor(popupSelector) {
@@ -11,7 +11,7 @@ export class Popup {
 
     removeEventListeners() {
         document.removeEventListener('keydown', this._handleEscClose);
-      }
+    }
 
     open() {
         toggleClass(this._popup);
@@ -25,22 +25,22 @@ export class Popup {
 
     _handleEscClose(event) {
         if (event.keyCode === 27) {
-              const popupOpened = document.querySelector('.popup_opened');
-              this.close();
-            }
+            const popupOpened = document.querySelector('.popup_opened');
+            this.close();
+        }
     }
 
     _handleOverlayClose() {
         const popupList = Array.from(document.querySelectorAll('.popup'));
-          
-            popupList.forEach((popupItem) => {
-              popupItem.addEventListener('click', (event) => {
+
+        popupList.forEach((popupItem) => {
+            popupItem.addEventListener('click', (event) => {
                 if (event.target === event.currentTarget) {
                     this.close();
                 }
             })
         })
-      }
+    }
 
     setEventListeners() {
         document.addEventListener('click', this._handleOverlayClose);
