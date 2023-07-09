@@ -1,10 +1,11 @@
 import { popupZoom } from '../index.js';
 
 export class Card {
-    constructor(data, templateSelector) {
+    constructor(data, templateSelector, handleCardClick) {
         this._image = data.link;
         this._text = data.name;
         this._templateSelector = templateSelector;
+        this._handleCardClick = handleCardClick;
     }
 
     _getTemplate() {
@@ -40,12 +41,31 @@ export class Card {
     }
 
     _handleOpenPopup() {
-        popupZoom.classList.add('popup_opened');
-        popupZoom.querySelector('.popupZoom__title').textContent = this._text;
-        popupZoom.querySelector('.popupZoom__img').src = this._image;
+        this._handleCardClick(this._image, this._text);
     }
 
     _handleClosePopup() {
         popupZoom.classList.remove('popup_opened');
     }
 }
+
+// Логика открытия попапа с картинкой
+// const handleCardClick = (image, text) => {
+    // const popupImage = document.querySelector('.popupZoom__img');
+    // const popupTitle = document.querySelector('.popupZoom__title');
+  
+    // popupImage.src = image;
+    // popupTitle.textContent = text;
+  
+    // // Открытие попапа с картинкой
+    // const popupZoom = document.querySelector('.popupZoom');
+    // popupZoom.classList.add('popup_opened');
+//   };
+  
+//   const cardData = {
+//     link: 'image.jpg',
+//     name: 'Card Name',
+//   };
+  
+//   const card = new Card(cardData, '.card-template', handleCardClick);
+//   const cardElement = card.generateCard();
