@@ -1,4 +1,5 @@
 import { popupZoom } from '../index.js';
+import { handleCardClick } from '../index.js';
 
 export class Card {
     constructor(data, templateSelector, handleCardClick) {
@@ -40,7 +41,7 @@ export class Card {
         this._element.closest('.place').remove();
     }
 
-    _handleOpenPopup() {
+    _handleOpenPopup = () => {
         this._handleCardClick(this._image, this._text);
     }
 
@@ -49,23 +50,23 @@ export class Card {
     }
 }
 
-// Логика открытия попапа с картинкой
+// // Логика открытия попапа с картинкой
 // const handleCardClick = (image, text) => {
-    // const popupImage = document.querySelector('.popupZoom__img');
-    // const popupTitle = document.querySelector('.popupZoom__title');
+//     const popupImage = document.querySelector('.popupZoom__img');
+//     const popupTitle = document.querySelector('.popupZoom__title');
   
-    // popupImage.src = image;
-    // popupTitle.textContent = text;
+//     popupImage.src = image;
+//     popupTitle.textContent = text;
   
-    // // Открытие попапа с картинкой
-    // const popupZoom = document.querySelector('.popupZoom');
-    // popupZoom.classList.add('popup_opened');
+//     // Открытие попапа с картинкой
+//     const popupZoom = document.querySelector('.popupZoom');
+//     popupZoom.classList.add('popup_opened');
 //   };
   
 //   const cardData = {
-//     link: 'image.jpg',
-//     name: 'Card Name',
+//     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg',
+//     name: 'Архыз'
 //   };
   
-//   const card = new Card(cardData, '.card-template', handleCardClick);
+//   const card = new Card(cardData, '.card-template', handleCardClick.bind(card));
 //   const cardElement = card.generateCard();

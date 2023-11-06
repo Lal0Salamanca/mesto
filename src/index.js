@@ -3,6 +3,7 @@ import { FormValidator } from './components/FormValidator.js';
 import { CardsSection } from './components/CardsSection.js';
 import './pages/index.css'; // добавьте импорт главного файла стилей
 import { Popup } from './components/Popup.js';
+import { PopupWithImage } from './components/PopupWithImage.js';
 
 let openPopup = document.querySelector('.popup-open');
 const popupEdit = document.querySelector('.popup_edit');
@@ -35,91 +36,6 @@ const closepopupZoom = popupZoom.querySelector('.popupZoom__button-close');
 const popupZoomImgName = popupZoom.querySelector('.popupZoom__title');
 const popupZoomImgLink = popupZoom.querySelector('.popupZoom__img');
 
-
-
-// функция подготовки формы ПОПАПА РЕДАКТИРОВАНИЯ к открытию (очишение текста инпутов,
-// удаление классов ошибок, кнопка активна)
-function prepareFormEdit(popup, config) {
-  const inputList = Array.from(popup.querySelectorAll(config.inputSelector));
-  const submitButton = popup.querySelector(config.submitButtonSelector);
-  const errorElementList = Array.from(popup.querySelectorAll('.form__input-error'));
-
-  inputList.forEach(input => {
-    input.classList.remove(config.inputErrorClass);
-    }
-  );
-
-  errorElementList.forEach(errorElement => {
-    errorElement.classList.remove(config.errorClass);
-    }
-  );
-
-  submitButton.classList.remove(config.inactiveButtonClass);
-  submitButton.disabled = false;
-}
-
-const openPopupEdit = new Popup('.popup_edit');
-openPopupEdit.setEventListeners();
-openPopup.addEventListener('click', () => openPopupEdit.open());
-
-
-// Включаем/выкл попап редактирования
-// openPopup.addEventListener('click', function () {
-//   prepareFormEdit(popupEdit, vConfig);
-//   toggleClass(popupEdit);
-// })
-// closePopup.addEventListener('click', () => toggleClass(popupEdit));
-
-
-// Закрытие попапов нажатием на Esc
-// document.addEventListener('keydown', function (event) {
-//   if (event.keyCode === 27) {
-//     const popupOpened = document.querySelector('.popup_opened');
-//     toggleClass(popupOpened)
-//   }
-// })
-
-// функция открытия/закрытия какого либо из попапов
-// function toggleClass(popupToToggle) {
-//   popupToToggle.classList.toggle('popup_opened');
-// }
-
-// // Закрытие попапов нажатием на overlay
-// function closePopupOverlay() {
-//   const popupList = Array.from(document.querySelectorAll('.popup'));
-
-//   popupList.forEach((popupItem) => {
-//     popupItem.addEventListener('click', (event) => {
-//       if (event.target === event.currentTarget) {
-//         toggleClass(popupItem);
-//       }
-//     })
-//   })
-// }
-
-// closePopupOverlay();
-
-nameInput.value = 'Жак-Ив Кусто';
-jobInput.value = 'Исследователь океана';
-
-// Находим форму в DOM
-// Находим поля формы в DOM
-// Обработчик «отправки» формы, хотя пока
-// она никуда отправляться не будет
-function handleFormSubmit(evt) {
-  evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
-  // Получите значение полей jobInput и nameInput из свойства value
-  // Выберите элементы, куда должны быть вставлены значения полей
-  // Вставьте новые значения с помощью textContent
-  const popupEdit = document.querySelector('.popup_edit');
-  editName.textContent = nameInput.value;
-  editProf.textContent = jobInput.value;
-  toggleClass(popupEdit);
-}
-// Прикрепляем обработчик к форме:
-// он будет следить за событием “submit” - «отправка»
-formElement.addEventListener('submit', handleFormSubmit);
-
 const initialCards = [
   {
     name: 'Архыз',
@@ -150,7 +66,7 @@ const initialCards = [
 //класс который добавляет карточки в секцию для карточек
 const сardsSection = new CardsSection({
   items: initialCards,
-  renderer: function(data) {
+  renderer: function (data) {
     const card = new Card(data, '.card_template')
     return card.generateCard();
   }
@@ -158,43 +74,55 @@ const сardsSection = new CardsSection({
 
 сardsSection.render();
 
-// функция подготовки формы ПОПАПА СОЗДАНИЯ НОВОЙ КАРТОЧКИ к открытию (очишение текста инпутов,
-// удаление классов ошибок, кнопка активна)
-function prepareFormNC(popup, config) {
-  const inputList = Array.from(popup.querySelectorAll(config.inputSelector));
-  const submitButton = popup.querySelector(config.submitButtonSelector);
-  const errorElementList = Array.from(popup.querySelectorAll('.form__input-error'));
+//Открытие попапа редактирования
+const openPopupEdit = new Popup('.popup_edit');
+openPopupEdit.setEventListeners();
+openPopup.addEventListener('click', () => openPopupEdit.open());
 
-  inputList.forEach(input => {
-    input.value = '';
-    input.classList.remove(config.inputErrorClass);
-    }
-  );
+//Открытие попапа создания новой карточки
+const openPopupCreateNC = new Popup('.popup_new-card');
+openPopupCreateNC.setEventListeners();
+openPopupNC.addEventListener('click', () => openPopupCreateNC.open());
 
-  errorElementList.forEach(errorElement => {
-    errorElement.classList.remove(config.errorClass);
-    }
-  );
+// открытие попапа с картинкой
+function handleCardClick(image, text) {
+  // const popupImage = document.querySelector('.popupZoom__img');
+  // const popupTitle = document.querySelector('.popupZoom__title');
 
-  submitButton.classList.remove(config.inactiveButtonClass);
-  submitButton.disabled = false;
+  popupZoomImgLink .src = image;       // Устанавливаем src изображения
+  popupZoomImgName.textContent = text; // Устанавливаем подпись к картинке
+
+  const popupZoom = document.querySelector('.popupZoom');
+  popupZoom.classList.add('popup_opened'); // Открываем попап с изображением
 }
 
-// открытие попапа новой карточки
-openPopupNC.addEventListener('click', function() {
-  prepareFormNC(popupNewCard, vConfig);
-  toggleClass(popupNewCard);
-});
-closepopupNewCard.addEventListener('click', () => toggleClass(popupNewCard));
+const card = new Card(initialCards, '.card-template', handleCardClick);
 
-// ЗАМЕНИЛИ ЭТОТ СПОСОБ ДОБАВЛЕНИЯ ОТРИСОВКИ КАРТОЧЕК НА КЛАСС CardsSection
-// проходим по массиву с данными, создаем и вставляем карточки в дом дерево
-// initialCards.forEach((item) => {
-//   const card = new Card(item, '.card_template');
-//   const cardItem = card.generateCard();
+// функция открытия/закрытия какого либо из попапов
+function toggleClass(popupToToggle) {
+  popupToToggle.classList.toggle('popup_opened');
+}
 
-//   cardsList.prepend(cardItem);
-// });
+nameInput.value = 'Жак-Ив Кусто';
+jobInput.value = 'Исследователь океана';
+
+//Логика обновления данных имени и профессии
+
+// Находим форму в DOM // Находим поля формы в DOM
+// Обработчик «отправки» формы, хотя пока она никуда отправляться не будет
+function handleFormSubmit(evt) {
+  evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
+  // Получите значение полей jobInput и nameInput из свойства value
+  // Выберите элементы, куда должны быть вставлены значения полей
+  // Вставьте новые значения с помощью textContent
+  const popupEdit = document.querySelector('.popup_edit');
+  editName.textContent = nameInput.value;
+  editProf.textContent = jobInput.value;
+  toggleClass(popupEdit);
+}
+// Прикрепляем обработчик к форме:
+// он будет следить за событием “submit” - «отправка»
+formElement.addEventListener('submit', handleFormSubmit);
 
 // функция создания новой карточки
 function handleSubmit(evt) {
@@ -232,6 +160,109 @@ validateFormNC.enableValidation();
 
 const validateFormEdit = new FormValidator(vConfig, formElement);
 validateFormEdit.enableValidation();
+
+// функция подготовки формы ПОПАПА РЕДАКТИРОВАНИЯ к открытию (очишение текста инпутов,
+// удаление классов ошибок, кнопка активна)
+function prepareFormEdit(popup, config) {
+  const inputList = Array.from(popup.querySelectorAll(config.inputSelector));
+  const submitButton = popup.querySelector(config.submitButtonSelector);
+  const errorElementList = Array.from(popup.querySelectorAll('.form__input-error'));
+
+  inputList.forEach(input => {
+    input.classList.remove(config.inputErrorClass);
+  }
+  );
+
+  errorElementList.forEach(errorElement => {
+    errorElement.classList.remove(config.errorClass);
+  }
+  );
+
+  submitButton.classList.remove(config.inactiveButtonClass);
+  submitButton.disabled = false;
+}
+
+// функция подготовки формы ПОПАПА СОЗДАНИЯ НОВОЙ КАРТОЧКИ к открытию (очишение текста инпутов,
+// удаление классов ошибок, кнопка активна)
+function prepareFormNC(popup, config) {
+  const inputList = Array.from(popup.querySelectorAll(config.inputSelector));
+  const submitButton = popup.querySelector(config.submitButtonSelector);
+  const errorElementList = Array.from(popup.querySelectorAll('.form__input-error'));
+
+  inputList.forEach(input => {
+    input.value = '';
+    input.classList.remove(config.inputErrorClass);
+  }
+  );
+
+  errorElementList.forEach(errorElement => {
+    errorElement.classList.remove(config.errorClass);
+  }
+  );
+
+  submitButton.classList.remove(config.inactiveButtonClass);
+  submitButton.disabled = false;
+}
+
+// Включаем/выкл попап редактирования
+// openPopup.addEventListener('click', function () {
+//   prepareFormEdit(popupEdit, vConfig);
+//   toggleClass(popupEdit);
+// })
+// closePopup.addEventListener('click', () => toggleClass(popupEdit));
+
+
+// Закрытие попапов нажатием на Esc
+// document.addEventListener('keydown', function (event) {
+//   if (event.keyCode === 27) {
+//     const popupOpened = document.querySelector('.popup_opened');
+//     toggleClass(popupOpened)
+//   }
+// })
+
+// // Закрытие попапов нажатием на overlay
+// function closePopupOverlay() {
+//   const popupList = Array.from(document.querySelectorAll('.popup'));
+
+//   popupList.forEach((popupItem) => {
+//     popupItem.addEventListener('click', (event) => {
+//       if (event.target === event.currentTarget) {
+//         toggleClass(popupItem);
+//       }
+//     })
+//   })
+// }
+
+// closePopupOverlay();
+
+// Логика открытия попапа с картинкой !!!!!!!!!!!!!!
+// export function handleCardClick(image, text) {
+//   const popupImage = document.querySelector('.popupZoom__img');
+//   const popupTitle = document.querySelector('.popupZoom__title');
+
+//   popupImage.src = image;
+//   popupTitle.textContent = text;
+
+//   // Открытие попапа с картинкой
+//   const popupZoom = document.querySelector('.popupZoom');
+//   popupZoom.classList.add('popup_opened');
+// };
+
+// открытие попапа новой карточки
+// openPopupNC.addEventListener('click', function() {
+//   prepareFormNC(popupNewCard, vConfig);
+//   popupNewCard.open();
+// });
+// closepopupNewCard.addEventListener('click', () => toggleClass(popupNewCard));
+
+// ЗАМЕНИЛИ ЭТОТ СПОСОБ ДОБАВЛЕНИЯ ОТРИСОВКИ КАРТОЧЕК НА КЛАСС CardsSection
+// проходим по массиву с данными, создаем и вставляем карточки в дом дерево
+// initialCards.forEach((item) => {
+//   const card = new Card(item, '.card_template');
+//   const cardItem = card.generateCard();
+
+//   cardsList.prepend(cardItem);
+// });
 
 // function handleSubmit(evt) {
 //   evt.preventDefault();
