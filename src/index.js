@@ -34,7 +34,7 @@ const openPopupZoom = cardTemplate.querySelector('.popupZoom-open');
 export const popupZoom = document.querySelector('.popupZoom');
 const closepopupZoom = popupZoom.querySelector('.popupZoom__button-close');
 const popupZoomImgName = popupZoom.querySelector('.popupZoom__title');
-const popupZoomImgLink = popupZoom.querySelector('.popupZoom__img');
+export const popupZoomImgLink = popupZoom.querySelector('.popupZoom__img');
 
 const initialCards = [
   {
@@ -63,17 +63,6 @@ const initialCards = [
   }
 ];
 
-//класс который добавляет карточки в секцию для карточек
-const сardsSection = new CardsSection({
-  items: initialCards,
-  renderer: function (data) {
-    const card = new Card(data, '.card_template')
-    return card.generateCard();
-  }
-}, '.elements');
-
-сardsSection.render();
-
 //Открытие попапа редактирования
 const openPopupEdit = new Popup('.popup_edit');
 openPopupEdit.setEventListeners();
@@ -86,22 +75,31 @@ openPopupNC.addEventListener('click', () => openPopupCreateNC.open());
 
 // открытие попапа с картинкой
 function handleCardClick(image, text) {
-  // const popupImage = document.querySelector('.popupZoom__img');
-  // const popupTitle = document.querySelector('.popupZoom__title');
+  const popupImage = document.querySelector('.popupZoom__img');
+  const popupTitle = document.querySelector('.popupZoom__title');
 
-  popupZoomImgLink .src = image;       // Устанавливаем src изображения
-  popupZoomImgName.textContent = text; // Устанавливаем подпись к картинке
+  popupImage.src = image;       // Устанавливаем src изображения
+  popupTitle.textContent = text; // Устанавливаем подпись к картинке
 
   const popupZoom = document.querySelector('.popupZoom');
   popupZoom.classList.add('popup_opened'); // Открываем попап с изображением
 }
 
-const card = new Card(initialCards, '.card-template', handleCardClick);
+//класс который добавляет карточки в секцию для карточек
+const сardsSection = new CardsSection({
+  items: initialCards,
+  renderer: function (data) {
+    const card = new Card(data, '.card_template', handleCardClick)
+    return card.generateCard();
+  }
+}, '.elements');
 
-// функция открытия/закрытия какого либо из попапов
-function toggleClass(popupToToggle) {
-  popupToToggle.classList.toggle('popup_opened');
-}
+сardsSection.render();
+
+// // функция открытия/закрытия какого либо из попапов
+// function toggleClass(popupToToggle) {
+//   popupToToggle.classList.toggle('popup_opened');
+// }
 
 nameInput.value = 'Жак-Ив Кусто';
 jobInput.value = 'Исследователь океана';
@@ -132,7 +130,7 @@ function handleSubmit(evt) {
     name: newCardNameInput.value,
     link: newCardLinkInput.value
   };
-  const card = new Card(newcard, '.card_template');
+  const card = new Card(newcard, '.card_template', handleCardClick);
 
   сardsSection.addItem(card.generateCard());
   // const cardItem = card.generateCard();

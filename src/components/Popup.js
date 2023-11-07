@@ -44,7 +44,7 @@ export class Popup {
 
     setEventListeners() {
         document.addEventListener('click', this._handleOverlayClose);
-        const closePopup = this._popup.querySelector('.button-close');
-        closePopup.addEventListener('click', () => this.close());
+        const closePopupBtn = this._popup.querySelector('.button-close');
+        closePopupBtn.addEventListener('click', () => this.close());
     }
 }

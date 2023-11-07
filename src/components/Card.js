@@ -1,5 +1,5 @@
 import { popupZoom } from '../index.js';
-import { handleCardClick } from '../index.js';
+import { popupZoomImgLink } from '../index.js';
 
 export class Card {
     constructor(data, templateSelector, handleCardClick) {
@@ -18,10 +18,9 @@ export class Card {
 
     generateCard() {
         this._element = this._getTemplate();
-        this._setEventListeners();
-
         this._element.querySelector('.place__image').src = this._image;
         this._element.querySelector('.place__title').textContent = this._text;
+        this._setEventListeners();
 
         return this._element;
     }
@@ -29,8 +28,8 @@ export class Card {
     _setEventListeners() {
         this._element.querySelector('.place__like').addEventListener('click', () => this._handleLike());
         this._element.querySelector('.place__delete').addEventListener('click', () => this._handleDelete());
-        this._element.querySelector('.place__image').addEventListener('click', () => this._handleOpenPopup());
-        popupZoom.querySelector('.popupZoom__button-close').addEventListener('click', () => this._handleClosePopup());
+        this._element.querySelector('.place__image').addEventListener('click', () => this._handleOpenPopupZoom());
+        popupZoom.querySelector('.popupZoom__button-close').addEventListener('click', () => this._handleClosePopupZoom());
     }
 
     _handleLike() {
@@ -41,12 +40,13 @@ export class Card {
         this._element.closest('.place').remove();
     }
 
-    _handleOpenPopup = () => {
+    _handleOpenPopupZoom = () => {
         this._handleCardClick(this._image, this._text);
     }
 
-    _handleClosePopup() {
+    _handleClosePopupZoom() {
         popupZoom.classList.remove('popup_opened');
+        popupZoomImgLink.src = '';
     }
 }
 
